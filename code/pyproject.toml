@@ -1,0 +1,36 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "sparse-time-probes"
+version = "1.0.0"
+description = "Control-task baselines for sparse observation-time probes of time-series foundation models."
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+authors = [{ name = "Anonymous Authors" }]
+dependencies = [
+  "numpy>=1.24",
+  "scipy>=1.11",
+  "scikit-learn>=1.3",
+  "matplotlib>=3.8",
+]
+
+[project.optional-dependencies]
+chronos = [
+  "torch>=2.2",
+  "chronos-forecasting==1.5.0",
+  "transformers==4.46.3",
+]
+dev = ["pytest>=7.4"]
+
+[project.scripts]
+stp-figures = "sparse_time_probes.cli:figures_entry"
+stp-control-task = "sparse_time_probes.cli:control_task_entry"
+
+[tool.setuptools.packages.find]
+include = ["sparse_time_probes*"]
+
+[tool.setuptools.package-data]
+sparse_time_probes = ["assets/*.json"]

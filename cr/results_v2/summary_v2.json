@@ -1,0 +1,5295 @@
+{
+ "models": [
+  "t5-tiny",
+  "t5-mini",
+  "t5-small",
+  "t5-base",
+  "t5-large",
+  "timemoe-50m",
+  "bolt-base",
+  "chronos-2"
+ ],
+ "n_eval": 36,
+ "cells": {
+  "t5-tiny|iid|0.5": {
+   "ridge|k": {
+    "layer": 4,
+    "real": 0.9,
+    "noise": 0.974,
+    "delta": [
+     -0.068,
+     -0.083,
+     -0.053
+    ]
+   },
+   "ridge|dt": {
+    "layer": 4,
+    "real": 0.252,
+    "noise": -0.0,
+    "delta": [
+     0.253,
+     0.206,
+     0.302
+    ],
+    "reader": 0.422,
+    "minus_reader": [
+     -0.122,
+     -0.173,
+     -0.082
+    ],
+    "reader_quant": 0.423,
+    "minus_reader_quant": [
+     -0.118,
+     -0.17,
+     -0.078
+    ],
+    "per_draw_median": [
+     0.265,
+     0.281,
+     0.234
+    ]
+   },
+   "ridge|m_perp": {
+    "layer": 3,
+    "real": 0.034,
+    "noise": 0.027,
+    "delta": [
+     0.036,
+     -0.011,
+     0.082
+    ],
+    "running_sum": 0.158,
+    "minus_running_sum": [
+     -0.119,
+     -0.188,
+     -0.035
+    ],
+    "running_sum_raw": 0.186,
+    "minus_running_sum_raw": [
+     -0.119,
+     -0.194,
+     -0.045
+    ],
+    "position_only": 0.037,
+    "per_draw_median": [
+     0.097,
+     0.013,
+     0.012
+    ]
+   },
+   "mlp|k": {
+    "layer": 4,
+    "real": 0.906,
+    "noise": 0.964,
+    "delta": [
+     -0.051,
+     -0.077,
+     -0.042
+    ]
+   },
+   "mlp|dt": {
+    "layer": 4,
+    "real": 0.277,
+    "noise": -0.001,
+    "delta": [
+     0.277,
+     0.211,
+     0.314
+    ],
+    "reader": 0.448,
+    "minus_reader": [
+     -0.14,
+     -0.176,
+     -0.11
+    ],
+    "reader_quant": 0.422,
+    "minus_reader_quant": [
+     -0.134,
+     -0.182,
+     -0.108
+    ]
+   },
+   "mlp|m_perp": {
+    "layer": 4,
+    "real": 0.088,
+    "noise": 0.006,
+    "delta": [
+     0.051,
+     -0.001,
+     0.114
+    ],
+    "running_sum": 0.162,
+    "minus_running_sum": [
+     -0.1,
+     -0.179,
+     -0.033
+    ],
+    "position_only": 0.037
+   }
+  },
+  "t5-tiny|iid|0.7": {
+   "ridge|k": {
+    "layer": 4,
+    "real": 0.889,
+    "noise": 0.966,
+    "delta": [
+     -0.052,
+     -0.069,
+     -0.042
+    ]
+   },
+   "ridge|dt": {
+    "layer": 4,
+    "real": 0.286,
+    "noise": -0.015,
+    "delta": [
+     0.303,
+     0.241,
+     0.355
+    ],
+    "reader": 0.376,
+    "minus_reader": [
+     -0.109,
+     -0.138,
+     -0.082
+    ],
+    "reader_quant": 0.378,
+    "minus_reader_quant": [
+     -0.123,
+     -0.149,
+     -0.094
+    ],
+    "per_draw_median": [
+     0.287,
+     0.25,
+     0.308
+    ]
+   },
+   "ridge|m_perp": {
+    "layer": 4,
+    "real": 0.111,
+    "noise": 0.02,
+    "delta": [
+     0.093,
+     0.046,
+     0.171
+    ],
+    "running_sum": 0.19,
+    "minus_running_sum": [
+     -0.049,
+     -0.102,
+     -0.021
+    ],
+    "running_sum_raw": 0.176,
+    "minus_running_sum_raw": [
+     -0.067,
+     -0.105,
+     -0.023
+    ],
+    "position_only": 0.042,
+    "per_draw_median": [
+     0.132,
+     0.166,
+     0.117
+    ]
+   },
+   "mlp|k": {
+    "layer": 3,
+    "real": 0.909,
+    "noise": 0.954,
+    "delta": [
+     -0.037,
+     -0.046,
+     -0.031
+    ]
+   },
+   "mlp|dt": {
+    "layer": 4,
+    "real": 0.297,
+    "noise": -0.004,
+    "delta": [
+     0.303,
+     0.264,
+     0.332
+    ],
+    "reader": 0.424,
+    "minus_reader": [
+     -0.141,
+     -0.161,
+     -0.087
+    ],
+    "reader_quant": 0.426,
+    "minus_reader_quant": [
+     -0.138,
+     -0.163,
+     -0.103
+    ]
+   },
+   "mlp|m_perp": {
+    "layer": 4,
+    "real": 0.125,
+    "noise": 0.042,
+    "delta": [
+     0.106,
+     0.056,
+     0.154
+    ],
+    "running_sum": 0.25,
+    "minus_running_sum": [
+     -0.054,
+     -0.114,
+     0.001
+    ],
+    "position_only": 0.042
+   }
+  },
+  "t5-tiny|block|0.5": {
+   "ridge|k": {
+    "layer": 4,
+    "real": 0.881,
+    "noise": 0.969,
+    "delta": [
+     -0.081,
+     -0.099,
+     -0.067
+    ]
+   },
+   "ridge|dt": {
+    "layer": 4,
+    "real": 0.425,
+    "noise": 0.033,
+    "delta": [
+     0.365,
+     0.286,
+     0.445
+    ],
+    "reader": 0.504,
+    "minus_reader": [
+     -0.075,
+     -0.083,
+     -0.049
+    ],
+    "reader_quant": 0.506,
+    "minus_reader_quant": [
+     -0.079,
+     -0.096,
+     -0.047
+    ],
+    "per_draw_median": [
+     0.403,
+     0.425,
+     0.444
+    ]
+   },
+   "ridge|m_perp": {
+    "layer": 3,
+    "real": 0.106,
+    "noise": 0.0,
+    "delta": [
+     0.1,
+     0.044,
+     0.164
+    ],
+    "running_sum": 0.378,
+    "minus_running_sum": [
+     -0.24,
+     -0.302,
+     -0.156
+    ],
+    "running_sum_raw": 0.304,
+    "minus_running_sum_raw": [
+     -0.205,
+     -0.297,
+     -0.062
+    ],
+    "position_only": -0.036,
+    "per_draw_median": [
+     0.1,
+     0.138,
+     0.109
+    ]
+   },
+   "mlp|k": {
+    "layer": 4,
+    "real": 0.9,
+    "noise": 0.962,
+    "delta": [
+     -0.054,
+     -0.073,
+     -0.046
+    ]
+   },
+   "mlp|dt": {
+    "layer": 4,
+    "real": 0.5,
+    "noise": 0.033,
+    "delta": [
+     0.428,
+     0.351,
+     0.488
+    ],
+    "reader": 0.579,
+    "minus_reader": [
+     -0.088,
+     -0.121,
+     -0.066
+    ],
+    "reader_quant": 0.595,
+    "minus_reader_quant": [
+     -0.09,
+     -0.116,
+     -0.06
+    ]
+   },
+   "mlp|m_perp": {
+    "layer": 4,
+    "real": 0.157,
+    "noise": 0.026,
+    "delta": [
+     0.123,
+     0.07,
+     0.186
+    ],
+    "running_sum": 0.492,
+    "minus_running_sum": [
+     -0.361,
+     -0.419,
+     -0.298
+    ],
+    "position_only": -0.036
+   }
+  },
+  "t5-tiny|block|0.7": {
+   "ridge|k": {
+    "layer": 4,
+    "real": 0.872,
+    "noise": 0.961,
+    "delta": [
+     -0.067,
+     -0.088,
+     -0.047
+    ]
+   },
+   "ridge|dt": {
+    "layer": 4,
+    "real": 0.432,
+    "noise": 0.025,
+    "delta": [
+     0.396,
+     0.333,
+     0.471
+    ],
+    "reader": 0.504,
+    "minus_reader": [
+     -0.076,
+     -0.107,
+     -0.025
+    ],
+    "reader_quant": 0.519,
+    "minus_reader_quant": [
+     -0.077,
+     -0.111,
+     -0.045
+    ],
+    "per_draw_median": [
+     0.466,
+     0.432,
+     0.411
+    ]
+   },
+   "ridge|m_perp": {
+    "layer": 4,
+    "real": 0.211,
+    "noise": 0.002,
+    "delta": [
+     0.208,
+     0.156,
+     0.283
+    ],
+    "running_sum": 0.339,
+    "minus_running_sum": [
+     -0.165,
+     -0.232,
+     -0.083
+    ],
+    "running_sum_raw": 0.368,
+    "minus_running_sum_raw": [
+     -0.205,
+     -0.236,
+     -0.124
+    ],
+    "position_only": 0.081,
+    "per_draw_median": [
+     0.191,
+     0.22,
+     0.169
+    ]
+   },
+   "mlp|k": {
+    "layer": 4,
+    "real": 0.91,
+    "noise": 0.948,
+    "delta": [
+     -0.035,
+     -0.044,
+     -0.028
+    ]
+   },
+   "mlp|dt": {
+    "layer": 4,
+    "real": 0.484,
+    "noise": 0.032,
+    "delta": [
+     0.448,
+     0.402,
+     0.499
+    ],
+    "reader": 0.57,
+    "minus_reader": [
+     -0.073,
+     -0.092,
+     -0.053
+    ],
+    "reader_quant": 0.58,
+    "minus_reader_quant": [
+     -0.075,
+     -0.09,
+     -0.05
+    ]
+   },
+   "mlp|m_perp": {
+    "layer": 4,
+    "real": 0.201,
+    "noise": -0.009,
+    "delta": [
+     0.228,
+     0.141,
+     0.281
+    ],
+    "running_sum": 0.504,
+    "minus_running_sum": [
+     -0.248,
+     -0.302,
+     -0.195
+    ],
+    "position_only": 0.081
+   }
+  },
+  "t5-tiny|mnar|0.5": {
+   "ridge|k": {
+    "layer": 4,
+    "real": 0.895,
+    "noise": 0.974,
+    "delta": [
+     -0.073,
+     -0.098,
+     -0.059
+    ]
+   },
+   "ridge|dt": {
+    "layer": 4,
+    "real": 0.507,
+    "noise": 0.022,
+    "delta": [
+     0.456,
+     0.414,
+     0.501
+    ],
+    "reader": 0.483,
+    "minus_reader": [
+     0.016,
+     -0.019,
+     0.044
+    ],
+    "reader_quant": 0.484,
+    "minus_reader_quant": [
+     0.016,
+     -0.02,
+     0.045
+    ],
+    "per_draw_median": [
+     0.475,
+     0.47,
+     0.487
+    ]
+   },
+   "ridge|m_perp": {
+    "layer": 3,
+    "real": 0.416,
+    "noise": 0.014,
+    "delta": [
+     0.426,
+     0.334,
+     0.493
+    ],
+    "running_sum": 0.804,
+    "minus_running_sum": [
+     -0.265,
+     -0.322,
+     -0.217
+    ],
+    "running_sum_raw": 0.809,
+    "minus_running_sum_raw": [
+     -0.269,
+     -0.327,
+     -0.221
+    ],
+    "position_only": 0.049,
+    "per_draw_median": [
+     0.437,
+     0.411,
+     0.444
+    ]
+   },
+   "mlp|k": {
+    "layer": 4,
+    "real": 0.931,
+    "noise": 0.963,
+    "delta": [
+     -0.034,
+     -0.044,
+     -0.027
+    ]
+   },
+   "mlp|dt": {
+    "layer": 2,
+    "real": 0.489,
+    "noise": 0.009,
+    "delta": [
+     0.434,
+     0.405,
+     0.481
+    ],
+    "reader": 0.628,
+    "minus_reader": [
+     -0.103,
+     -0.141,
+     -0.077
+    ],
+    "reader_quant": 0.627,
+    "minus_reader_quant": [
+     -0.103,
+     -0.143,
+     -0.077
+    ]
+   },
+   "mlp|m_perp": {
+    "layer": 3,
+    "real": 0.527,
+    "noise": 0.02,
+    "delta": [
+     0.473,
+     0.339,
+     0.579
+    ],
+    "running_sum": 0.916,
+    "minus_running_sum": [
+     -0.289,
+     -0.329,
+     -0.26
+    ],
+    "position_only": 0.049
+   }
+  },
+  "t5-tiny|mnar|0.7": {
+   "ridge|k": {
+    "layer": 4,
+    "real": 0.885,
+    "noise": 0.966,
+    "delta": [
+     -0.076,
+     -0.088,
+     -0.054
+    ]
+   },
+   "ridge|dt": {
+    "layer": 3,
+    "real": 0.477,
+    "noise": 0.046,
+    "delta": [
+     0.362,
+     0.333,
+     0.411
+    ],
+    "reader": 0.46,
+    "minus_reader": [
+     -0.039,
+     -0.075,
+     -0.007
+    ],
+    "reader_quant": 0.46,
+    "minus_reader_quant": [
+     -0.039,
+     -0.076,
+     -0.007
+    ],
+    "per_draw_median": [
+     0.479,
+     0.434,
+     0.454
+    ]
+   },
+   "ridge|m_perp": {
+    "layer": 3,
+    "real": 0.448,
+    "noise": 0.02,
+    "delta": [
+     0.399,
+     0.34,
+     0.458
+    ],
+    "running_sum": 0.804,
+    "minus_running_sum": [
+     -0.269,
+     -0.314,
+     -0.256
+    ],
+    "running_sum_raw": 0.803,
+    "minus_running_sum_raw": [
+     -0.27,
+     -0.315,
+     -0.257
+    ],
+    "position_only": 0.057,
+    "per_draw_median": [
+     0.459,
+     0.465,
+     0.445
+    ]
+   },
+   "mlp|k": {
+    "layer": 4,
+    "real": 0.915,
+    "noise": 0.944,
+    "delta": [
+     -0.022,
+     -0.039,
+     -0.019
+    ]
+   },
+   "mlp|dt": {
+    "layer": 3,
+    "real": 0.491,
+    "noise": 0.033,
+    "delta": [
+     0.377,
+     0.333,
+     0.442
+    ],
+    "reader": 0.599,
+    "minus_reader": [
+     -0.106,
+     -0.138,
+     -0.066
+    ],
+    "reader_quant": 0.599,
+    "minus_reader_quant": [
+     -0.11,
+     -0.137,
+     -0.063
+    ]
+   },
+   "mlp|m_perp": {
+    "layer": 3,
+    "real": 0.532,
+    "noise": 0.052,
+    "delta": [
+     0.445,
+     0.358,
+     0.548
+    ],
+    "running_sum": 0.864,
+    "minus_running_sum": [
+     -0.256,
+     -0.301,
+     -0.218
+    ],
+    "position_only": 0.057
+   }
+  },
+  "t5-mini|iid|0.5": {
+   "ridge|k": {
+    "layer": 3,
+    "real": 0.965,
+    "noise": 0.988,
+    "delta": [
+     -0.021,
+     -0.025,
+     -0.018
+    ]
+   },
+   "ridge|dt": {
+    "layer": 4,
+    "real": 0.418,
+    "noise": -0.001,
+    "delta": [
+     0.401,
+     0.298,
+     0.471
+    ],
+    "reader": 0.422,
+    "minus_reader": [
+     -0.003,
+     -0.021,
+     0.009
+    ],
+    "reader_quant": 0.423,
+    "minus_reader_quant": [
+     -0.008,
+     -0.023,
+     0.011
+    ],
+    "per_draw_median": [
+     0.422,
+     0.44,
+     0.407
+    ]
+   },
+   "ridge|m_perp": {
+    "layer": 3,
+    "real": 0.104,
+    "noise": 0.03,
+    "delta": [
+     0.092,
+     0.051,
+     0.152
+    ],
+    "running_sum": 0.158,
+    "minus_running_sum": [
+     -0.082,
+     -0.147,
+     -0.029
+    ],
+    "running_sum_raw": 0.186,
+    "minus_running_sum_raw": [
+     -0.084,
+     -0.173,
+     -0.009
+    ],
+    "position_only": 0.037,
+    "per_draw_median": [
+     0.085,
+     0.088,
+     0.057
+    ]
+   },
+   "mlp|k": {
+    "layer": 3,
+    "real": 0.958,
+    "noise": 0.98,
+    "delta": [
+     -0.023,
+     -0.031,
+     -0.018
+    ]
+   },
+   "mlp|dt": {
+    "layer": 4,
+    "real": 0.44,
+    "noise": 0.005,
+    "delta": [
+     0.428,
+     0.319,
+     0.488
+    ],
+    "reader": 0.448,
+    "minus_reader": [
+     -0.001,
+     -0.016,
+     0.006
+    ],
+    "reader_quant": 0.422,
+    "minus_reader_quant": [
+     0.002,
+     -0.009,
+     0.016
+    ]
+   },
+   "mlp|m_perp": {
+    "layer": 4,
+    "real": 0.091,
+    "noise": 0.018,
+    "delta": [
+     0.053,
+     0.001,
+     0.142
+    ],
+    "running_sum": 0.162,
+    "minus_running_sum": [
+     -0.061,
+     -0.153,
+     0.012
+    ],
+    "position_only": 0.037
+   }
+  },
+  "t5-mini|iid|0.7": {
+   "ridge|k": {
+    "layer": 3,
+    "real": 0.958,
+    "noise": 0.98,
+    "delta": [
+     -0.022,
+     -0.027,
+     -0.015
+    ]
+   },
+   "ridge|dt": {
+    "layer": 4,
+    "real": 0.413,
+    "noise": -0.0,
+    "delta": [
+     0.429,
+     0.357,
+     0.49
+    ],
+    "reader": 0.376,
+    "minus_reader": [
+     0.012,
+     -0.002,
+     0.022
+    ],
+    "reader_quant": 0.378,
+    "minus_reader_quant": [
+     0.008,
+     -0.005,
+     0.018
+    ],
+    "per_draw_median": [
+     0.417,
+     0.418,
+     0.437
+    ]
+   },
+   "ridge|m_perp": {
+    "layer": 4,
+    "real": 0.116,
+    "noise": -0.006,
+    "delta": [
+     0.125,
+     0.105,
+     0.212
+    ],
+    "running_sum": 0.19,
+    "minus_running_sum": [
+     -0.048,
+     -0.109,
+     -0.013
+    ],
+    "running_sum_raw": 0.176,
+    "minus_running_sum_raw": [
+     -0.07,
+     -0.128,
+     0.005
+    ],
+    "position_only": 0.042,
+    "per_draw_median": [
+     0.144,
+     0.163,
+     0.17
+    ]
+   },
+   "mlp|k": {
+    "layer": 2,
+    "real": 0.937,
+    "noise": 0.964,
+    "delta": [
+     -0.025,
+     -0.034,
+     -0.02
+    ]
+   },
+   "mlp|dt": {
+    "layer": 4,
+    "real": 0.46,
+    "noise": -0.009,
+    "delta": [
+     0.446,
+     0.391,
+     0.495
+    ],
+    "reader": 0.424,
+    "minus_reader": [
+     -0.003,
+     -0.013,
+     0.023
+    ],
+    "reader_quant": 0.426,
+    "minus_reader_quant": [
+     0.003,
+     -0.01,
+     0.017
+    ]
+   },
+   "mlp|m_perp": {
+    "layer": 3,
+    "real": 0.13,
+    "noise": 0.01,
+    "delta": [
+     0.148,
+     0.075,
+     0.19
+    ],
+    "running_sum": 0.25,
+    "minus_running_sum": [
+     -0.048,
+     -0.108,
+     -0.004
+    ],
+    "position_only": 0.042
+   }
+  },
+  "t5-mini|block|0.5": {
+   "ridge|k": {
+    "layer": 3,
+    "real": 0.954,
+    "noise": 0.987,
+    "delta": [
+     -0.028,
+     -0.033,
+     -0.024
+    ]
+   },
+   "ridge|dt": {
+    "layer": 4,
+    "real": 0.556,
+    "noise": 0.031,
+    "delta": [
+     0.541,
+     0.44,
+     0.593
+    ],
+    "reader": 0.504,
+    "minus_reader": [
+     0.024,
+     0.009,
+     0.054
+    ],
+    "reader_quant": 0.506,
+    "minus_reader_quant": [
+     0.025,
+     0.006,
+     0.047
+    ],
+    "per_draw_median": [
+     0.515,
+     0.598,
+     0.583
+    ]
+   },
+   "ridge|m_perp": {
+    "layer": 4,
+    "real": 0.243,
+    "noise": 0.033,
+    "delta": [
+     0.198,
+     0.152,
+     0.26
+    ],
+    "running_sum": 0.378,
+    "minus_running_sum": [
+     -0.138,
+     -0.184,
+     -0.055
+    ],
+    "running_sum_raw": 0.304,
+    "minus_running_sum_raw": [
+     -0.075,
+     -0.181,
+     -0.01
+    ],
+    "position_only": -0.036,
+    "per_draw_median": [
+     0.265,
+     0.217,
+     0.177
+    ]
+   },
+   "mlp|k": {
+    "layer": 3,
+    "real": 0.949,
+    "noise": 0.981,
+    "delta": [
+     -0.03,
+     -0.038,
+     -0.024
+    ]
+   },
+   "mlp|dt": {
+    "layer": 4,
+    "real": 0.614,
+    "noise": 0.021,
+    "delta": [
+     0.591,
+     0.46,
+     0.652
+    ],
+    "reader": 0.579,
+    "minus_reader": [
+     0.004,
+     -0.015,
+     0.023
+    ],
+    "reader_quant": 0.595,
+    "minus_reader_quant": [
+     0.004,
+     -0.007,
+     0.024
+    ]
+   },
+   "mlp|m_perp": {
+    "layer": 4,
+    "real": 0.213,
+    "noise": 0.024,
+    "delta": [
+     0.215,
+     0.156,
+     0.244
+    ],
+    "running_sum": 0.492,
+    "minus_running_sum": [
+     -0.258,
+     -0.303,
+     -0.225
+    ],
+    "position_only": -0.036
+   }
+  },
+  "t5-mini|block|0.7": {
+   "ridge|k": {
+    "layer": 3,
+    "real": 0.95,
+    "noise": 0.979,
+    "delta": [
+     -0.024,
+     -0.031,
+     -0.019
+    ]
+   },
+   "ridge|dt": {
+    "layer": 4,
+    "real": 0.562,
+    "noise": 0.02,
+    "delta": [
+     0.507,
+     0.445,
+     0.583
+    ],
+    "reader": 0.504,
+    "minus_reader": [
+     0.023,
+     -0.003,
+     0.036
+    ],
+    "reader_quant": 0.519,
+    "minus_reader_quant": [
+     0.008,
+     -0.007,
+     0.025
+    ],
+    "per_draw_median": [
+     0.57,
+     0.53,
+     0.566
+    ]
+   },
+   "ridge|m_perp": {
+    "layer": 4,
+    "real": 0.226,
+    "noise": -0.006,
+    "delta": [
+     0.227,
+     0.15,
+     0.272
+    ],
+    "running_sum": 0.339,
+    "minus_running_sum": [
+     -0.106,
+     -0.201,
+     -0.051
+    ],
+    "running_sum_raw": 0.368,
+    "minus_running_sum_raw": [
+     -0.141,
+     -0.206,
+     -0.064
+    ],
+    "position_only": 0.081,
+    "per_draw_median": [
+     0.245,
+     0.271,
+     0.274
+    ]
+   },
+   "mlp|k": {
+    "layer": 2,
+    "real": 0.944,
+    "noise": 0.964,
+    "delta": [
+     -0.015,
+     -0.024,
+     -0.012
+    ]
+   },
+   "mlp|dt": {
+    "layer": 4,
+    "real": 0.593,
+    "noise": 0.011,
+    "delta": [
+     0.59,
+     0.502,
+     0.649
+    ],
+    "reader": 0.57,
+    "minus_reader": [
+     0.019,
+     0.002,
+     0.027
+    ],
+    "reader_quant": 0.58,
+    "minus_reader_quant": [
+     0.015,
+     0.005,
+     0.026
+    ]
+   },
+   "mlp|m_perp": {
+    "layer": 4,
+    "real": 0.254,
+    "noise": 0.011,
+    "delta": [
+     0.301,
+     0.185,
+     0.329
+    ],
+    "running_sum": 0.504,
+    "minus_running_sum": [
+     -0.209,
+     -0.261,
+     -0.153
+    ],
+    "position_only": 0.081
+   }
+  },
+  "t5-mini|mnar|0.5": {
+   "ridge|k": {
+    "layer": 3,
+    "real": 0.965,
+    "noise": 0.988,
+    "delta": [
+     -0.021,
+     -0.025,
+     -0.018
+    ]
+   },
+   "ridge|dt": {
+    "layer": 4,
+    "real": 0.537,
+    "noise": 0.017,
+    "delta": [
+     0.536,
+     0.483,
+     0.569
+    ],
+    "reader": 0.483,
+    "minus_reader": [
+     0.071,
+     0.031,
+     0.088
+    ],
+    "reader_quant": 0.484,
+    "minus_reader_quant": [
+     0.071,
+     0.031,
+     0.089
+    ],
+    "per_draw_median": [
+     0.533,
+     0.514,
+     0.526
+    ]
+   },
+   "ridge|m_perp": {
+    "layer": 4,
+    "real": 0.537,
+    "noise": 0.031,
+    "delta": [
+     0.476,
+     0.416,
+     0.545
+    ],
+    "running_sum": 0.804,
+    "minus_running_sum": [
+     -0.212,
+     -0.27,
+     -0.123
+    ],
+    "running_sum_raw": 0.809,
+    "minus_running_sum_raw": [
+     -0.215,
+     -0.28,
+     -0.135
+    ],
+    "position_only": 0.049,
+    "per_draw_median": [
+     0.539,
+     0.518,
+     0.573
+    ]
+   },
+   "mlp|k": {
+    "layer": 2,
+    "real": 0.967,
+    "noise": 0.981,
+    "delta": [
+     -0.008,
+     -0.011,
+     -0.006
+    ]
+   },
+   "mlp|dt": {
+    "layer": 4,
+    "real": 0.58,
+    "noise": 0.004,
+    "delta": [
+     0.571,
+     0.471,
+     0.628
+    ],
+    "reader": 0.628,
+    "minus_reader": [
+     -0.029,
+     -0.054,
+     -0.008
+    ],
+    "reader_quant": 0.627,
+    "minus_reader_quant": [
+     -0.03,
+     -0.053,
+     -0.008
+    ]
+   },
+   "mlp|m_perp": {
+    "layer": 4,
+    "real": 0.589,
+    "noise": 0.044,
+    "delta": [
+     0.471,
+     0.413,
+     0.595
+    ],
+    "running_sum": 0.916,
+    "minus_running_sum": [
+     -0.223,
+     -0.274,
+     -0.174
+    ],
+    "position_only": 0.049
+   }
+  },
+  "t5-mini|mnar|0.7": {
+   "ridge|k": {
+    "layer": 3,
+    "real": 0.943,
+    "noise": 0.979,
+    "delta": [
+     -0.015,
+     -0.023,
+     -0.011
+    ]
+   },
+   "ridge|dt": {
+    "layer": 4,
+    "real": 0.506,
+    "noise": 0.034,
+    "delta": [
+     0.463,
+     0.426,
+     0.48
+    ],
+    "reader": 0.46,
+    "minus_reader": [
+     0.014,
+     -0.015,
+     0.031
+    ],
+    "reader_quant": 0.46,
+    "minus_reader_quant": [
+     0.014,
+     -0.014,
+     0.03
+    ],
+    "per_draw_median": [
+     0.479,
+     0.517,
+     0.511
+    ]
+   },
+   "ridge|m_perp": {
+    "layer": 3,
+    "real": 0.526,
+    "noise": 0.02,
+    "delta": [
+     0.455,
+     0.398,
+     0.531
+    ],
+    "running_sum": 0.804,
+    "minus_running_sum": [
+     -0.195,
+     -0.22,
+     -0.151
+    ],
+    "running_sum_raw": 0.803,
+    "minus_running_sum_raw": [
+     -0.195,
+     -0.213,
+     -0.161
+    ],
+    "position_only": 0.057,
+    "per_draw_median": [
+     0.483,
+     0.529,
+     0.605
+    ]
+   },
+   "mlp|k": {
+    "layer": 2,
+    "real": 0.953,
+    "noise": 0.97,
+    "delta": [
+     -0.001,
+     -0.005,
+     0.007
+    ]
+   },
+   "mlp|dt": {
+    "layer": 4,
+    "real": 0.542,
+    "noise": 0.015,
+    "delta": [
+     0.491,
+     0.428,
+     0.515
+    ],
+    "reader": 0.599,
+    "minus_reader": [
+     -0.046,
+     -0.078,
+     -0.03
+    ],
+    "reader_quant": 0.599,
+    "minus_reader_quant": [
+     -0.046,
+     -0.08,
+     -0.026
+    ]
+   },
+   "mlp|m_perp": {
+    "layer": 3,
+    "real": 0.622,
+    "noise": 0.007,
+    "delta": [
+     0.571,
+     0.46,
+     0.644
+    ],
+    "running_sum": 0.864,
+    "minus_running_sum": [
+     -0.177,
+     -0.229,
+     -0.153
+    ],
+    "position_only": 0.057
+   }
+  },
+  "t5-small|iid|0.5": {
+   "ridge|k": {
+    "layer": 5,
+    "real": 0.961,
+    "noise": 0.99,
+    "delta": [
+     -0.025,
+     -0.033,
+     -0.022
+    ]
+   },
+   "ridge|dt": {
+    "layer": 4,
+    "real": 0.433,
+    "noise": 0.009,
+    "delta": [
+     0.408,
+     0.332,
+     0.489
+    ],
+    "reader": 0.422,
+    "minus_reader": [
+     0.043,
+     0.009,
+     0.056
+    ],
+    "reader_quant": 0.423,
+    "minus_reader_quant": [
+     0.043,
+     0.007,
+     0.052
+    ],
+    "per_draw_median": [
+     0.416,
+     0.459,
+     0.432
+    ]
+   },
+   "ridge|m_perp": {
+    "layer": 4,
+    "real": 0.084,
+    "noise": 0.027,
+    "delta": [
+     0.052,
+     0.014,
+     0.111
+    ],
+    "running_sum": 0.158,
+    "minus_running_sum": [
+     -0.089,
+     -0.157,
+     0.026
+    ],
+    "running_sum_raw": 0.186,
+    "minus_running_sum_raw": [
+     -0.08,
+     -0.175,
+     -0.017
+    ],
+    "position_only": 0.037,
+    "per_draw_median": [
+     0.163,
+     0.084,
+     0.059
+    ]
+   },
+   "mlp|k": {
+    "layer": 4,
+    "real": 0.959,
+    "noise": 0.98,
+    "delta": [
+     -0.022,
+     -0.026,
+     -0.02
+    ]
+   },
+   "mlp|dt": {
+    "layer": 4,
+    "real": 0.451,
+    "noise": 0.008,
+    "delta": [
+     0.456,
+     0.344,
+     0.539
+    ],
+    "reader": 0.448,
+    "minus_reader": [
+     0.029,
+     0.011,
+     0.039
+    ],
+    "reader_quant": 0.422,
+    "minus_reader_quant": [
+     0.032,
+     0.017,
+     0.04
+    ]
+   },
+   "mlp|m_perp": {
+    "layer": 6,
+    "real": 0.14,
+    "noise": 0.02,
+    "delta": [
+     0.114,
+     0.071,
+     0.179
+    ],
+    "running_sum": 0.162,
+    "minus_running_sum": [
+     -0.025,
+     -0.085,
+     0.026
+    ],
+    "position_only": 0.037
+   }
+  },
+  "t5-small|iid|0.7": {
+   "ridge|k": {
+    "layer": 4,
+    "real": 0.967,
+    "noise": 0.98,
+    "delta": [
+     -0.014,
+     -0.016,
+     -0.01
+    ]
+   },
+   "ridge|dt": {
+    "layer": 5,
+    "real": 0.436,
+    "noise": -0.015,
+    "delta": [
+     0.444,
+     0.353,
+     0.512
+    ],
+    "reader": 0.376,
+    "minus_reader": [
+     0.051,
+     0.025,
+     0.059
+    ],
+    "reader_quant": 0.378,
+    "minus_reader_quant": [
+     0.037,
+     0.021,
+     0.052
+    ],
+    "per_draw_median": [
+     0.448,
+     0.428,
+     0.432
+    ]
+   },
+   "ridge|m_perp": {
+    "layer": 5,
+    "real": 0.142,
+    "noise": -0.01,
+    "delta": [
+     0.161,
+     0.123,
+     0.195
+    ],
+    "running_sum": 0.19,
+    "minus_running_sum": [
+     -0.086,
+     -0.12,
+     -0.015
+    ],
+    "running_sum_raw": 0.176,
+    "minus_running_sum_raw": [
+     -0.086,
+     -0.134,
+     -0.003
+    ],
+    "position_only": 0.042,
+    "per_draw_median": [
+     0.12,
+     0.139,
+     0.157
+    ]
+   },
+   "mlp|k": {
+    "layer": 6,
+    "real": 0.947,
+    "noise": 0.971,
+    "delta": [
+     -0.025,
+     -0.03,
+     -0.019
+    ]
+   },
+   "mlp|dt": {
+    "layer": 5,
+    "real": 0.44,
+    "noise": -0.02,
+    "delta": [
+     0.479,
+     0.43,
+     0.559
+    ],
+    "reader": 0.424,
+    "minus_reader": [
+     0.035,
+     0.006,
+     0.052
+    ],
+    "reader_quant": 0.426,
+    "minus_reader_quant": [
+     0.031,
+     0.006,
+     0.05
+    ]
+   },
+   "mlp|m_perp": {
+    "layer": 6,
+    "real": 0.159,
+    "noise": 0.024,
+    "delta": [
+     0.155,
+     0.11,
+     0.218
+    ],
+    "running_sum": 0.25,
+    "minus_running_sum": [
+     -0.049,
+     -0.114,
+     0.003
+    ],
+    "position_only": 0.042
+   }
+  },
+  "t5-small|block|0.5": {
+   "ridge|k": {
+    "layer": 5,
+    "real": 0.957,
+    "noise": 0.988,
+    "delta": [
+     -0.029,
+     -0.035,
+     -0.024
+    ]
+   },
+   "ridge|dt": {
+    "layer": 4,
+    "real": 0.584,
+    "noise": 0.018,
+    "delta": [
+     0.575,
+     0.453,
+     0.67
+    ],
+    "reader": 0.504,
+    "minus_reader": [
+     0.07,
+     0.057,
+     0.089
+    ],
+    "reader_quant": 0.506,
+    "minus_reader_quant": [
+     0.069,
+     0.054,
+     0.082
+    ],
+    "per_draw_median": [
+     0.578,
+     0.576,
+     0.605
+    ]
+   },
+   "ridge|m_perp": {
+    "layer": 6,
+    "real": 0.139,
+    "noise": 0.023,
+    "delta": [
+     0.079,
+     0.051,
+     0.178
+    ],
+    "running_sum": 0.378,
+    "minus_running_sum": [
+     -0.211,
+     -0.243,
+     -0.125
+    ],
+    "running_sum_raw": 0.304,
+    "minus_running_sum_raw": [
+     -0.175,
+     -0.244,
+     -0.054
+    ],
+    "position_only": -0.036,
+    "per_draw_median": [
+     0.13,
+     0.184,
+     0.108
+    ]
+   },
+   "mlp|k": {
+    "layer": 5,
+    "real": 0.94,
+    "noise": 0.983,
+    "delta": [
+     -0.038,
+     -0.044,
+     -0.032
+    ]
+   },
+   "mlp|dt": {
+    "layer": 4,
+    "real": 0.628,
+    "noise": 0.018,
+    "delta": [
+     0.578,
+     0.499,
+     0.704
+    ],
+    "reader": 0.579,
+    "minus_reader": [
+     0.037,
+     0.011,
+     0.051
+    ],
+    "reader_quant": 0.595,
+    "minus_reader_quant": [
+     0.035,
+     0.01,
+     0.055
+    ]
+   },
+   "mlp|m_perp": {
+    "layer": 5,
+    "real": 0.192,
+    "noise": 0.018,
+    "delta": [
+     0.154,
+     0.063,
+     0.225
+    ],
+    "running_sum": 0.492,
+    "minus_running_sum": [
+     -0.329,
+     -0.362,
+     -0.279
+    ],
+    "position_only": -0.036
+   }
+  },
+  "t5-small|block|0.7": {
+   "ridge|k": {
+    "layer": 5,
+    "real": 0.956,
+    "noise": 0.983,
+    "delta": [
+     -0.022,
+     -0.029,
+     -0.02
+    ]
+   },
+   "ridge|dt": {
+    "layer": 6,
+    "real": 0.592,
+    "noise": 0.022,
+    "delta": [
+     0.592,
+     0.527,
+     0.646
+    ],
+    "reader": 0.504,
+    "minus_reader": [
+     0.053,
+     0.031,
+     0.073
+    ],
+    "reader_quant": 0.519,
+    "minus_reader_quant": [
+     0.05,
+     0.027,
+     0.066
+    ],
+    "per_draw_median": [
+     0.649,
+     0.575,
+     0.555
+    ]
+   },
+   "ridge|m_perp": {
+    "layer": 5,
+    "real": 0.213,
+    "noise": -0.026,
+    "delta": [
+     0.243,
+     0.145,
+     0.307
+    ],
+    "running_sum": 0.339,
+    "minus_running_sum": [
+     -0.111,
+     -0.139,
+     -0.068
+    ],
+    "running_sum_raw": 0.368,
+    "minus_running_sum_raw": [
+     -0.117,
+     -0.203,
+     -0.065
+    ],
+    "position_only": 0.081,
+    "per_draw_median": [
+     0.182,
+     0.258,
+     0.231
+    ]
+   },
+   "mlp|k": {
+    "layer": 5,
+    "real": 0.941,
+    "noise": 0.971,
+    "delta": [
+     -0.029,
+     -0.032,
+     -0.023
+    ]
+   },
+   "mlp|dt": {
+    "layer": 6,
+    "real": 0.649,
+    "noise": 0.028,
+    "delta": [
+     0.618,
+     0.535,
+     0.676
+    ],
+    "reader": 0.57,
+    "minus_reader": [
+     0.04,
+     0.027,
+     0.054
+    ],
+    "reader_quant": 0.58,
+    "minus_reader_quant": [
+     0.037,
+     0.027,
+     0.053
+    ]
+   },
+   "mlp|m_perp": {
+    "layer": 6,
+    "real": 0.264,
+    "noise": -0.004,
+    "delta": [
+     0.244,
+     0.203,
+     0.324
+    ],
+    "running_sum": 0.504,
+    "minus_running_sum": [
+     -0.222,
+     -0.269,
+     -0.159
+    ],
+    "position_only": 0.081
+   }
+  },
+  "t5-small|mnar|0.5": {
+   "ridge|k": {
+    "layer": 5,
+    "real": 0.961,
+    "noise": 0.99,
+    "delta": [
+     -0.024,
+     -0.031,
+     -0.02
+    ]
+   },
+   "ridge|dt": {
+    "layer": 4,
+    "real": 0.559,
+    "noise": 0.002,
+    "delta": [
+     0.552,
+     0.514,
+     0.581
+    ],
+    "reader": 0.483,
+    "minus_reader": [
+     0.063,
+     0.039,
+     0.116
+    ],
+    "reader_quant": 0.484,
+    "minus_reader_quant": [
+     0.063,
+     0.039,
+     0.116
+    ],
+    "per_draw_median": [
+     0.563,
+     0.531,
+     0.555
+    ]
+   },
+   "ridge|m_perp": {
+    "layer": 3,
+    "real": 0.469,
+    "noise": 0.016,
+    "delta": [
+     0.402,
+     0.339,
+     0.465
+    ],
+    "running_sum": 0.804,
+    "minus_running_sum": [
+     -0.238,
+     -0.345,
+     -0.198
+    ],
+    "running_sum_raw": 0.809,
+    "minus_running_sum_raw": [
+     -0.241,
+     -0.347,
+     -0.194
+    ],
+    "position_only": 0.049,
+    "per_draw_median": [
+     0.411,
+     0.485,
+     0.494
+    ]
+   },
+   "mlp|k": {
+    "layer": 5,
+    "real": 0.962,
+    "noise": 0.983,
+    "delta": [
+     -0.018,
+     -0.021,
+     -0.012
+    ]
+   },
+   "mlp|dt": {
+    "layer": 4,
+    "real": 0.59,
+    "noise": 0.023,
+    "delta": [
+     0.541,
+     0.495,
+     0.619
+    ],
+    "reader": 0.628,
+    "minus_reader": [
+     -0.011,
+     -0.037,
+     0.005
+    ],
+    "reader_quant": 0.627,
+    "minus_reader_quant": [
+     -0.011,
+     -0.037,
+     0.005
+    ]
+   },
+   "mlp|m_perp": {
+    "layer": 6,
+    "real": 0.465,
+    "noise": 0.03,
+    "delta": [
+     0.449,
+     0.365,
+     0.519
+    ],
+    "running_sum": 0.916,
+    "minus_running_sum": [
+     -0.29,
+     -0.36,
+     -0.244
+    ],
+    "position_only": 0.049
+   }
+  },
+  "t5-small|mnar|0.7": {
+   "ridge|k": {
+    "layer": 5,
+    "real": 0.964,
+    "noise": 0.983,
+    "delta": [
+     -0.019,
+     -0.023,
+     -0.015
+    ]
+   },
+   "ridge|dt": {
+    "layer": 3,
+    "real": 0.515,
+    "noise": 0.044,
+    "delta": [
+     0.461,
+     0.408,
+     0.508
+    ],
+    "reader": 0.46,
+    "minus_reader": [
+     0.021,
+     -0.01,
+     0.031
+    ],
+    "reader_quant": 0.46,
+    "minus_reader_quant": [
+     0.022,
+     -0.011,
+     0.03
+    ],
+    "per_draw_median": [
+     0.511,
+     0.527,
+     0.51
+    ]
+   },
+   "ridge|m_perp": {
+    "layer": 2,
+    "real": 0.435,
+    "noise": -0.0,
+    "delta": [
+     0.426,
+     0.328,
+     0.504
+    ],
+    "running_sum": 0.804,
+    "minus_running_sum": [
+     -0.245,
+     -0.317,
+     -0.184
+    ],
+    "running_sum_raw": 0.803,
+    "minus_running_sum_raw": [
+     -0.24,
+     -0.306,
+     -0.187
+    ],
+    "position_only": 0.057,
+    "per_draw_median": [
+     0.46,
+     0.448,
+     0.54
+    ]
+   },
+   "mlp|k": {
+    "layer": 6,
+    "real": 0.959,
+    "noise": 0.968,
+    "delta": [
+     -0.011,
+     -0.017,
+     -0.005
+    ]
+   },
+   "mlp|dt": {
+    "layer": 6,
+    "real": 0.532,
+    "noise": 0.037,
+    "delta": [
+     0.475,
+     0.429,
+     0.524
+    ],
+    "reader": 0.599,
+    "minus_reader": [
+     -0.033,
+     -0.066,
+     -0.009
+    ],
+    "reader_quant": 0.599,
+    "minus_reader_quant": [
+     -0.032,
+     -0.066,
+     -0.009
+    ]
+   },
+   "mlp|m_perp": {
+    "layer": 3,
+    "real": 0.501,
+    "noise": -0.005,
+    "delta": [
+     0.56,
+     0.424,
+     0.606
+    ],
+    "running_sum": 0.864,
+    "minus_running_sum": [
+     -0.241,
+     -0.321,
+     -0.185
+    ],
+    "position_only": 0.057
+   }
+  },
+  "t5-base|iid|0.5": {
+   "ridge|k": {
+    "layer": 10,
+    "real": 0.982,
+    "noise": 0.995,
+    "delta": [
+     -0.013,
+     -0.015,
+     -0.011
+    ]
+   },
+   "ridge|dt": {
+    "layer": 11,
+    "real": 0.483,
+    "noise": 0.013,
+    "delta": [
+     0.481,
+     0.364,
+     0.568
+    ],
+    "reader": 0.422,
+    "minus_reader": [
+     0.062,
+     0.047,
+     0.083
+    ],
+    "reader_quant": 0.423,
+    "minus_reader_quant": [
+     0.055,
+     0.044,
+     0.076
+    ],
+    "per_draw_median": [
+     0.448,
+     0.501,
+     0.479
+    ]
+   },
+   "ridge|m_perp": {
+    "layer": 8,
+    "real": 0.104,
+    "noise": 0.003,
+    "delta": [
+     0.092,
+     0.04,
+     0.164
+    ],
+    "running_sum": 0.158,
+    "minus_running_sum": [
+     -0.023,
+     -0.087,
+     0.062
+    ],
+    "running_sum_raw": 0.186,
+    "minus_running_sum_raw": [
+     -0.026,
+     -0.124,
+     0.051
+    ],
+    "position_only": 0.037,
+    "per_draw_median": [
+     0.117,
+     0.116,
+     0.082
+    ]
+   },
+   "mlp|k": {
+    "layer": 8,
+    "real": 0.975,
+    "noise": 0.986,
+    "delta": [
+     -0.011,
+     -0.014,
+     -0.009
+    ]
+   },
+   "mlp|dt": {
+    "layer": 12,
+    "real": 0.487,
+    "noise": 0.005,
+    "delta": [
+     0.496,
+     0.368,
+     0.57
+    ],
+    "reader": 0.448,
+    "minus_reader": [
+     0.042,
+     0.028,
+     0.054
+    ],
+    "reader_quant": 0.422,
+    "minus_reader_quant": [
+     0.047,
+     0.034,
+     0.063
+    ]
+   },
+   "mlp|m_perp": {
+    "layer": 8,
+    "real": 0.156,
+    "noise": 0.002,
+    "delta": [
+     0.099,
+     0.082,
+     0.165
+    ],
+    "running_sum": 0.162,
+    "minus_running_sum": [
+     -0.03,
+     -0.094,
+     0.036
+    ],
+    "position_only": 0.037
+   }
+  },
+  "t5-base|iid|0.7": {
+   "ridge|k": {
+    "layer": 10,
+    "real": 0.974,
+    "noise": 0.992,
+    "delta": [
+     -0.013,
+     -0.017,
+     -0.011
+    ]
+   },
+   "ridge|dt": {
+    "layer": 12,
+    "real": 0.43,
+    "noise": 0.006,
+    "delta": [
+     0.452,
+     0.369,
+     0.511
+    ],
+    "reader": 0.376,
+    "minus_reader": [
+     0.048,
+     0.033,
+     0.064
+    ],
+    "reader_quant": 0.378,
+    "minus_reader_quant": [
+     0.04,
+     0.021,
+     0.049
+    ],
+    "per_draw_median": [
+     0.412,
+     0.462,
+     0.449
+    ]
+   },
+   "ridge|m_perp": {
+    "layer": 11,
+    "real": 0.171,
+    "noise": -0.004,
+    "delta": [
+     0.172,
+     0.13,
+     0.258
+    ],
+    "running_sum": 0.19,
+    "minus_running_sum": [
+     -0.036,
+     -0.088,
+     0.006
+    ],
+    "running_sum_raw": 0.176,
+    "minus_running_sum_raw": [
+     -0.051,
+     -0.115,
+     0.029
+    ],
+    "position_only": 0.042,
+    "per_draw_median": [
+     0.114,
+     0.149,
+     0.231
+    ]
+   },
+   "mlp|k": {
+    "layer": 12,
+    "real": 0.955,
+    "noise": 0.98,
+    "delta": [
+     -0.024,
+     -0.028,
+     -0.02
+    ]
+   },
+   "mlp|dt": {
+    "layer": 6,
+    "real": 0.491,
+    "noise": -0.009,
+    "delta": [
+     0.494,
+     0.434,
+     0.547
+    ],
+    "reader": 0.424,
+    "minus_reader": [
+     0.037,
+     0.025,
+     0.053
+    ],
+    "reader_quant": 0.426,
+    "minus_reader_quant": [
+     0.038,
+     0.021,
+     0.055
+    ]
+   },
+   "mlp|m_perp": {
+    "layer": 8,
+    "real": 0.208,
+    "noise": 0.014,
+    "delta": [
+     0.193,
+     0.137,
+     0.261
+    ],
+    "running_sum": 0.25,
+    "minus_running_sum": [
+     -0.021,
+     -0.097,
+     0.046
+    ],
+    "position_only": 0.042
+   }
+  },
+  "t5-base|block|0.5": {
+   "ridge|k": {
+    "layer": 10,
+    "real": 0.978,
+    "noise": 0.995,
+    "delta": [
+     -0.016,
+     -0.018,
+     -0.013
+    ]
+   },
+   "ridge|dt": {
+    "layer": 12,
+    "real": 0.634,
+    "noise": 0.017,
+    "delta": [
+     0.603,
+     0.502,
+     0.654
+    ],
+    "reader": 0.504,
+    "minus_reader": [
+     0.073,
+     0.052,
+     0.094
+    ],
+    "reader_quant": 0.506,
+    "minus_reader_quant": [
+     0.074,
+     0.059,
+     0.09
+    ],
+    "per_draw_median": [
+     0.61,
+     0.633,
+     0.664
+    ]
+   },
+   "ridge|m_perp": {
+    "layer": 12,
+    "real": 0.188,
+    "noise": -0.016,
+    "delta": [
+     0.231,
+     0.155,
+     0.288
+    ],
+    "running_sum": 0.378,
+    "minus_running_sum": [
+     -0.114,
+     -0.171,
+     -0.045
+    ],
+    "running_sum_raw": 0.304,
+    "minus_running_sum_raw": [
+     -0.085,
+     -0.158,
+     -0.001
+    ],
+    "position_only": -0.036,
+    "per_draw_median": [
+     0.222,
+     0.155,
+     0.231
+    ]
+   },
+   "mlp|k": {
+    "layer": 8,
+    "real": 0.969,
+    "noise": 0.986,
+    "delta": [
+     -0.014,
+     -0.018,
+     -0.011
+    ]
+   },
+   "mlp|dt": {
+    "layer": 8,
+    "real": 0.658,
+    "noise": 0.028,
+    "delta": [
+     0.625,
+     0.508,
+     0.665
+    ],
+    "reader": 0.579,
+    "minus_reader": [
+     0.033,
+     0.013,
+     0.059
+    ],
+    "reader_quant": 0.595,
+    "minus_reader_quant": [
+     0.041,
+     0.025,
+     0.055
+    ]
+   },
+   "mlp|m_perp": {
+    "layer": 12,
+    "real": 0.221,
+    "noise": 0.001,
+    "delta": [
+     0.207,
+     0.151,
+     0.244
+    ],
+    "running_sum": 0.492,
+    "minus_running_sum": [
+     -0.26,
+     -0.315,
+     -0.193
+    ],
+    "position_only": -0.036
+   }
+  },
+  "t5-base|block|0.7": {
+   "ridge|k": {
+    "layer": 11,
+    "real": 0.972,
+    "noise": 0.992,
+    "delta": [
+     -0.02,
+     -0.023,
+     -0.018
+    ]
+   },
+   "ridge|dt": {
+    "layer": 8,
+    "real": 0.583,
+    "noise": 0.028,
+    "delta": [
+     0.519,
+     0.47,
+     0.628
+    ],
+    "reader": 0.504,
+    "minus_reader": [
+     0.045,
+     0.03,
+     0.067
+    ],
+    "reader_quant": 0.519,
+    "minus_reader_quant": [
+     0.041,
+     0.025,
+     0.055
+    ],
+    "per_draw_median": [
+     0.61,
+     0.604,
+     0.56
+    ]
+   },
+   "ridge|m_perp": {
+    "layer": 12,
+    "real": 0.258,
+    "noise": 0.027,
+    "delta": [
+     0.246,
+     0.158,
+     0.295
+    ],
+    "running_sum": 0.339,
+    "minus_running_sum": [
+     -0.101,
+     -0.175,
+     -0.06
+    ],
+    "running_sum_raw": 0.368,
+    "minus_running_sum_raw": [
+     -0.128,
+     -0.184,
+     -0.054
+    ],
+    "position_only": 0.081,
+    "per_draw_median": [
+     0.245,
+     0.282,
+     0.257
+    ]
+   },
+   "mlp|k": {
+    "layer": 8,
+    "real": 0.967,
+    "noise": 0.98,
+    "delta": [
+     -0.013,
+     -0.018,
+     -0.01
+    ]
+   },
+   "mlp|dt": {
+    "layer": 12,
+    "real": 0.644,
+    "noise": 0.025,
+    "delta": [
+     0.603,
+     0.526,
+     0.656
+    ],
+    "reader": 0.57,
+    "minus_reader": [
+     0.037,
+     0.022,
+     0.05
+    ],
+    "reader_quant": 0.58,
+    "minus_reader_quant": [
+     0.032,
+     0.02,
+     0.054
+    ]
+   },
+   "mlp|m_perp": {
+    "layer": 12,
+    "real": 0.28,
+    "noise": 0.026,
+    "delta": [
+     0.278,
+     0.215,
+     0.317
+    ],
+    "running_sum": 0.504,
+    "minus_running_sum": [
+     -0.182,
+     -0.235,
+     -0.117
+    ],
+    "position_only": 0.081
+   }
+  },
+  "t5-base|mnar|0.5": {
+   "ridge|k": {
+    "layer": 10,
+    "real": 0.983,
+    "noise": 0.995,
+    "delta": [
+     -0.012,
+     -0.013,
+     -0.01
+    ]
+   },
+   "ridge|dt": {
+    "layer": 7,
+    "real": 0.563,
+    "noise": 0.009,
+    "delta": [
+     0.538,
+     0.468,
+     0.61
+    ],
+    "reader": 0.483,
+    "minus_reader": [
+     0.095,
+     0.049,
+     0.116
+    ],
+    "reader_quant": 0.484,
+    "minus_reader_quant": [
+     0.095,
+     0.05,
+     0.115
+    ],
+    "per_draw_median": [
+     0.528,
+     0.557,
+     0.572
+    ]
+   },
+   "ridge|m_perp": {
+    "layer": 7,
+    "real": 0.622,
+    "noise": 0.031,
+    "delta": [
+     0.593,
+     0.436,
+     0.656
+    ],
+    "running_sum": 0.804,
+    "minus_running_sum": [
+     -0.133,
+     -0.161,
+     -0.08
+    ],
+    "running_sum_raw": 0.809,
+    "minus_running_sum_raw": [
+     -0.129,
+     -0.18,
+     -0.081
+    ],
+    "position_only": 0.049,
+    "per_draw_median": [
+     0.633,
+     0.616,
+     0.643
+    ]
+   },
+   "mlp|k": {
+    "layer": 8,
+    "real": 0.98,
+    "noise": 0.987,
+    "delta": [
+     -0.007,
+     -0.009,
+     -0.005
+    ]
+   },
+   "mlp|dt": {
+    "layer": 12,
+    "real": 0.584,
+    "noise": 0.005,
+    "delta": [
+     0.555,
+     0.488,
+     0.626
+    ],
+    "reader": 0.628,
+    "minus_reader": [
+     -0.025,
+     -0.037,
+     -0.003
+    ],
+    "reader_quant": 0.627,
+    "minus_reader_quant": [
+     -0.025,
+     -0.036,
+     -0.003
+    ]
+   },
+   "mlp|m_perp": {
+    "layer": 8,
+    "real": 0.675,
+    "noise": 0.023,
+    "delta": [
+     0.607,
+     0.508,
+     0.657
+    ],
+    "running_sum": 0.916,
+    "minus_running_sum": [
+     -0.156,
+     -0.196,
+     -0.126
+    ],
+    "position_only": 0.049
+   }
+  },
+  "t5-base|mnar|0.7": {
+   "ridge|k": {
+    "layer": 10,
+    "real": 0.976,
+    "noise": 0.993,
+    "delta": [
+     -0.012,
+     -0.015,
+     -0.008
+    ]
+   },
+   "ridge|dt": {
+    "layer": 12,
+    "real": 0.545,
+    "noise": 0.02,
+    "delta": [
+     0.474,
+     0.436,
+     0.521
+    ],
+    "reader": 0.46,
+    "minus_reader": [
+     0.028,
+     -0.016,
+     0.041
+    ],
+    "reader_quant": 0.46,
+    "minus_reader_quant": [
+     0.028,
+     -0.016,
+     0.041
+    ],
+    "per_draw_median": [
+     0.52,
+     0.505,
+     0.53
+    ]
+   },
+   "ridge|m_perp": {
+    "layer": 7,
+    "real": 0.613,
+    "noise": 0.009,
+    "delta": [
+     0.541,
+     0.515,
+     0.661
+    ],
+    "running_sum": 0.804,
+    "minus_running_sum": [
+     -0.17,
+     -0.186,
+     -0.126
+    ],
+    "running_sum_raw": 0.803,
+    "minus_running_sum_raw": [
+     -0.167,
+     -0.186,
+     -0.116
+    ],
+    "position_only": 0.057,
+    "per_draw_median": [
+     0.563,
+     0.625,
+     0.656
+    ]
+   },
+   "mlp|k": {
+    "layer": 8,
+    "real": 0.973,
+    "noise": 0.978,
+    "delta": [
+     -0.003,
+     -0.005,
+     0.002
+    ]
+   },
+   "mlp|dt": {
+    "layer": 12,
+    "real": 0.582,
+    "noise": 0.01,
+    "delta": [
+     0.498,
+     0.463,
+     0.547
+    ],
+    "reader": 0.599,
+    "minus_reader": [
+     -0.02,
+     -0.036,
+     0.002
+    ],
+    "reader_quant": 0.599,
+    "minus_reader_quant": [
+     -0.023,
+     -0.035,
+     0.007
+    ]
+   },
+   "mlp|m_perp": {
+    "layer": 8,
+    "real": 0.665,
+    "noise": 0.052,
+    "delta": [
+     0.57,
+     0.507,
+     0.683
+    ],
+    "running_sum": 0.864,
+    "minus_running_sum": [
+     -0.155,
+     -0.182,
+     -0.11
+    ],
+    "position_only": 0.057
+   }
+  },
+  "t5-large|iid|0.5": {
+   "ridge|k": {
+    "layer": 20,
+    "real": 0.983,
+    "noise": 0.996,
+    "delta": [
+     -0.012,
+     -0.013,
+     -0.01
+    ]
+   },
+   "ridge|dt": {
+    "layer": 23,
+    "real": 0.446,
+    "noise": 0.008,
+    "delta": [
+     0.435,
+     0.343,
+     0.511
+    ],
+    "reader": 0.422,
+    "minus_reader": [
+     0.03,
+     0.012,
+     0.048
+    ],
+    "reader_quant": 0.423,
+    "minus_reader_quant": [
+     0.029,
+     0.014,
+     0.047
+    ],
+    "per_draw_median": [
+     0.434,
+     0.464,
+     0.416
+    ]
+   },
+   "ridge|m_perp": {
+    "layer": 13,
+    "real": 0.082,
+    "noise": 0.01,
+    "delta": [
+     0.062,
+     -0.011,
+     0.091
+    ],
+    "running_sum": 0.158,
+    "minus_running_sum": [
+     -0.078,
+     -0.143,
+     -0.02
+    ],
+    "running_sum_raw": 0.186,
+    "minus_running_sum_raw": [
+     -0.087,
+     -0.171,
+     -0.006
+    ],
+    "position_only": 0.037,
+    "per_draw_median": [
+     0.109,
+     0.073,
+     0.056
+    ]
+   },
+   "mlp|k": {
+    "layer": 8,
+    "real": 0.97,
+    "noise": 0.986,
+    "delta": [
+     -0.015,
+     -0.017,
+     -0.011
+    ]
+   },
+   "mlp|dt": {
+    "layer": 23,
+    "real": 0.482,
+    "noise": 0.009,
+    "delta": [
+     0.476,
+     0.4,
+     0.556
+    ],
+    "reader": 0.448,
+    "minus_reader": [
+     0.039,
+     0.026,
+     0.049
+    ],
+    "reader_quant": 0.422,
+    "minus_reader_quant": [
+     0.045,
+     0.028,
+     0.051
+    ]
+   },
+   "mlp|m_perp": {
+    "layer": 16,
+    "real": 0.132,
+    "noise": 0.039,
+    "delta": [
+     0.1,
+     0.031,
+     0.151
+    ],
+    "running_sum": 0.162,
+    "minus_running_sum": [
+     -0.06,
+     -0.105,
+     0.042
+    ],
+    "position_only": 0.037
+   }
+  },
+  "t5-large|iid|0.7": {
+   "ridge|k": {
+    "layer": 23,
+    "real": 0.978,
+    "noise": 0.993,
+    "delta": [
+     -0.015,
+     -0.018,
+     -0.012
+    ]
+   },
+   "ridge|dt": {
+    "layer": 17,
+    "real": 0.389,
+    "noise": 0.006,
+    "delta": [
+     0.393,
+     0.293,
+     0.487
+    ],
+    "reader": 0.376,
+    "minus_reader": [
+     0.014,
+     -0.013,
+     0.028
+    ],
+    "reader_quant": 0.378,
+    "minus_reader_quant": [
+     0.004,
+     -0.013,
+     0.015
+    ],
+    "per_draw_median": [
+     0.408,
+     0.415,
+     0.385
+    ]
+   },
+   "ridge|m_perp": {
+    "layer": 16,
+    "real": 0.128,
+    "noise": -0.018,
+    "delta": [
+     0.143,
+     0.086,
+     0.214
+    ],
+    "running_sum": 0.19,
+    "minus_running_sum": [
+     -0.087,
+     -0.119,
+     -0.017
+    ],
+    "running_sum_raw": 0.176,
+    "minus_running_sum_raw": [
+     -0.087,
+     -0.165,
+     -0.038
+    ],
+    "position_only": 0.042,
+    "per_draw_median": [
+     0.134,
+     0.139,
+     0.143
+    ]
+   },
+   "mlp|k": {
+    "layer": 24,
+    "real": 0.954,
+    "noise": 0.977,
+    "delta": [
+     -0.022,
+     -0.028,
+     -0.019
+    ]
+   },
+   "mlp|dt": {
+    "layer": 23,
+    "real": 0.475,
+    "noise": -0.012,
+    "delta": [
+     0.481,
+     0.431,
+     0.558
+    ],
+    "reader": 0.424,
+    "minus_reader": [
+     0.034,
+     0.007,
+     0.054
+    ],
+    "reader_quant": 0.426,
+    "minus_reader_quant": [
+     0.032,
+     0.01,
+     0.051
+    ]
+   },
+   "mlp|m_perp": {
+    "layer": 16,
+    "real": 0.205,
+    "noise": -0.02,
+    "delta": [
+     0.21,
+     0.148,
+     0.28
+    ],
+    "running_sum": 0.25,
+    "minus_running_sum": [
+     -0.006,
+     -0.081,
+     0.05
+    ],
+    "position_only": 0.042
+   }
+  },
+  "t5-large|block|0.5": {
+   "ridge|k": {
+    "layer": 17,
+    "real": 0.983,
+    "noise": 0.996,
+    "delta": [
+     -0.011,
+     -0.013,
+     -0.011
+    ]
+   },
+   "ridge|dt": {
+    "layer": 17,
+    "real": 0.6,
+    "noise": 0.021,
+    "delta": [
+     0.587,
+     0.481,
+     0.632
+    ],
+    "reader": 0.504,
+    "minus_reader": [
+     0.071,
+     0.052,
+     0.081
+    ],
+    "reader_quant": 0.506,
+    "minus_reader_quant": [
+     0.067,
+     0.046,
+     0.072
+    ],
+    "per_draw_median": [
+     0.612,
+     0.566,
+     0.638
+    ]
+   },
+   "ridge|m_perp": {
+    "layer": 21,
+    "real": 0.195,
+    "noise": 0.034,
+    "delta": [
+     0.177,
+     0.119,
+     0.216
+    ],
+    "running_sum": 0.378,
+    "minus_running_sum": [
+     -0.157,
+     -0.203,
+     -0.079
+    ],
+    "running_sum_raw": 0.304,
+    "minus_running_sum_raw": [
+     -0.101,
+     -0.18,
+     -0.018
+    ],
+    "position_only": -0.036,
+    "per_draw_median": [
+     0.139,
+     0.269,
+     0.187
+    ]
+   },
+   "mlp|k": {
+    "layer": 16,
+    "real": 0.972,
+    "noise": 0.985,
+    "delta": [
+     -0.015,
+     -0.018,
+     -0.011
+    ]
+   },
+   "mlp|dt": {
+    "layer": 16,
+    "real": 0.644,
+    "noise": 0.023,
+    "delta": [
+     0.606,
+     0.497,
+     0.676
+    ],
+    "reader": 0.579,
+    "minus_reader": [
+     0.035,
+     0.014,
+     0.055
+    ],
+    "reader_quant": 0.595,
+    "minus_reader_quant": [
+     0.036,
+     0.011,
+     0.057
+    ]
+   },
+   "mlp|m_perp": {
+    "layer": 16,
+    "real": 0.271,
+    "noise": 0.028,
+    "delta": [
+     0.192,
+     0.13,
+     0.267
+    ],
+    "running_sum": 0.492,
+    "minus_running_sum": [
+     -0.234,
+     -0.285,
+     -0.159
+    ],
+    "position_only": -0.036
+   }
+  },
+  "t5-large|block|0.7": {
+   "ridge|k": {
+    "layer": 20,
+    "real": 0.977,
+    "noise": 0.994,
+    "delta": [
+     -0.014,
+     -0.017,
+     -0.012
+    ]
+   },
+   "ridge|dt": {
+    "layer": 21,
+    "real": 0.562,
+    "noise": 0.003,
+    "delta": [
+     0.524,
+     0.445,
+     0.652
+    ],
+    "reader": 0.504,
+    "minus_reader": [
+     0.021,
+     0.003,
+     0.037
+    ],
+    "reader_quant": 0.519,
+    "minus_reader_quant": [
+     0.014,
+     0.001,
+     0.035
+    ],
+    "per_draw_median": [
+     0.597,
+     0.546,
+     0.546
+    ]
+   },
+   "ridge|m_perp": {
+    "layer": 18,
+    "real": 0.272,
+    "noise": -0.017,
+    "delta": [
+     0.278,
+     0.154,
+     0.336
+    ],
+    "running_sum": 0.339,
+    "minus_running_sum": [
+     -0.141,
+     -0.183,
+     -0.109
+    ],
+    "running_sum_raw": 0.368,
+    "minus_running_sum_raw": [
+     -0.147,
+     -0.179,
+     -0.116
+    ],
+    "position_only": 0.081,
+    "per_draw_median": [
+     0.254,
+     0.202,
+     0.262
+    ]
+   },
+   "mlp|k": {
+    "layer": 23,
+    "real": 0.961,
+    "noise": 0.98,
+    "delta": [
+     -0.02,
+     -0.025,
+     -0.015
+    ]
+   },
+   "mlp|dt": {
+    "layer": 23,
+    "real": 0.637,
+    "noise": 0.016,
+    "delta": [
+     0.596,
+     0.491,
+     0.667
+    ],
+    "reader": 0.57,
+    "minus_reader": [
+     0.038,
+     0.024,
+     0.046
+    ],
+    "reader_quant": 0.58,
+    "minus_reader_quant": [
+     0.034,
+     0.022,
+     0.044
+    ]
+   },
+   "mlp|m_perp": {
+    "layer": 16,
+    "real": 0.365,
+    "noise": 0.014,
+    "delta": [
+     0.281,
+     0.205,
+     0.359
+    ],
+    "running_sum": 0.504,
+    "minus_running_sum": [
+     -0.15,
+     -0.188,
+     -0.109
+    ],
+    "position_only": 0.081
+   }
+  },
+  "t5-large|mnar|0.5": {
+   "ridge|k": {
+    "layer": 17,
+    "real": 0.986,
+    "noise": 0.996,
+    "delta": [
+     -0.009,
+     -0.011,
+     -0.007
+    ]
+   },
+   "ridge|dt": {
+    "layer": 12,
+    "real": 0.551,
+    "noise": 0.025,
+    "delta": [
+     0.525,
+     0.47,
+     0.561
+    ],
+    "reader": 0.483,
+    "minus_reader": [
+     0.064,
+     0.038,
+     0.118
+    ],
+    "reader_quant": 0.484,
+    "minus_reader_quant": [
+     0.064,
+     0.038,
+     0.118
+    ],
+    "per_draw_median": [
+     0.523,
+     0.543,
+     0.583
+    ]
+   },
+   "ridge|m_perp": {
+    "layer": 14,
+    "real": 0.67,
+    "noise": 0.054,
+    "delta": [
+     0.608,
+     0.473,
+     0.662
+    ],
+    "running_sum": 0.804,
+    "minus_running_sum": [
+     -0.106,
+     -0.127,
+     -0.079
+    ],
+    "running_sum_raw": 0.809,
+    "minus_running_sum_raw": [
+     -0.109,
+     -0.129,
+     -0.087
+    ],
+    "position_only": 0.049,
+    "per_draw_median": [
+     0.672,
+     0.649,
+     0.689
+    ]
+   },
+   "mlp|k": {
+    "layer": 8,
+    "real": 0.983,
+    "noise": 0.987,
+    "delta": [
+     -0.002,
+     -0.006,
+     0.0
+    ]
+   },
+   "mlp|dt": {
+    "layer": 16,
+    "real": 0.641,
+    "noise": -0.003,
+    "delta": [
+     0.606,
+     0.517,
+     0.648
+    ],
+    "reader": 0.628,
+    "minus_reader": [
+     0.009,
+     -0.012,
+     0.024
+    ],
+    "reader_quant": 0.627,
+    "minus_reader_quant": [
+     0.008,
+     -0.011,
+     0.025
+    ]
+   },
+   "mlp|m_perp": {
+    "layer": 24,
+    "real": 0.636,
+    "noise": 0.024,
+    "delta": [
+     0.592,
+     0.489,
+     0.632
+    ],
+    "running_sum": 0.916,
+    "minus_running_sum": [
+     -0.192,
+     -0.224,
+     -0.146
+    ],
+    "position_only": 0.049
+   }
+  },
+  "t5-large|mnar|0.7": {
+   "ridge|k": {
+    "layer": 22,
+    "real": 0.98,
+    "noise": 0.994,
+    "delta": [
+     -0.011,
+     -0.013,
+     -0.009
+    ]
+   },
+   "ridge|dt": {
+    "layer": 24,
+    "real": 0.52,
+    "noise": 0.03,
+    "delta": [
+     0.484,
+     0.457,
+     0.558
+    ],
+    "reader": 0.46,
+    "minus_reader": [
+     0.004,
+     -0.02,
+     0.031
+    ],
+    "reader_quant": 0.46,
+    "minus_reader_quant": [
+     0.004,
+     -0.019,
+     0.031
+    ],
+    "per_draw_median": [
+     0.511,
+     0.523,
+     0.512
+    ]
+   },
+   "ridge|m_perp": {
+    "layer": 7,
+    "real": 0.619,
+    "noise": 0.012,
+    "delta": [
+     0.568,
+     0.447,
+     0.631
+    ],
+    "running_sum": 0.804,
+    "minus_running_sum": [
+     -0.149,
+     -0.172,
+     -0.11
+    ],
+    "running_sum_raw": 0.803,
+    "minus_running_sum_raw": [
+     -0.145,
+     -0.171,
+     -0.111
+    ],
+    "position_only": 0.057,
+    "per_draw_median": [
+     0.583,
+     0.616,
+     0.632
+    ]
+   },
+   "mlp|k": {
+    "layer": 23,
+    "real": 0.972,
+    "noise": 0.98,
+    "delta": [
+     -0.006,
+     -0.008,
+     -0.001
+    ]
+   },
+   "mlp|dt": {
+    "layer": 12,
+    "real": 0.557,
+    "noise": 0.017,
+    "delta": [
+     0.471,
+     0.432,
+     0.547
+    ],
+    "reader": 0.599,
+    "minus_reader": [
+     -0.019,
+     -0.027,
+     0.008
+    ],
+    "reader_quant": 0.599,
+    "minus_reader_quant": [
+     -0.018,
+     -0.028,
+     0.01
+    ]
+   },
+   "mlp|m_perp": {
+    "layer": 12,
+    "real": 0.68,
+    "noise": 0.018,
+    "delta": [
+     0.581,
+     0.54,
+     0.678
+    ],
+    "running_sum": 0.864,
+    "minus_running_sum": [
+     -0.13,
+     -0.158,
+     -0.103
+    ],
+    "position_only": 0.057
+   }
+  },
+  "timemoe-50m|iid|0.5": {
+   "ridge|k": {
+    "layer": 5,
+    "real": 0.91,
+    "noise": 0.95,
+    "delta": [
+     -0.037,
+     -0.046,
+     -0.026
+    ]
+   },
+   "ridge|dt": {
+    "layer": 10,
+    "real": 0.377,
+    "noise": -0.001,
+    "delta": [
+     0.39,
+     0.327,
+     0.451
+    ],
+    "reader": 0.356,
+    "minus_reader": [
+     0.011,
+     -0.014,
+     0.025
+    ],
+    "per_draw_median": [
+     0.403,
+     0.402,
+     0.358
+    ]
+   },
+   "ridge|m_perp": {
+    "layer": 12,
+    "real": 0.075,
+    "noise": -0.021,
+    "delta": [
+     0.07,
+     0.011,
+     0.145
+    ],
+    "running_sum": 0.165,
+    "minus_running_sum": [
+     -0.091,
+     -0.155,
+     -0.004
+    ],
+    "running_sum_raw": 0.16,
+    "minus_running_sum_raw": [
+     -0.09,
+     -0.192,
+     0.011
+    ],
+    "position_only": 0.037,
+    "per_draw_median": [
+     0.096,
+     0.085,
+     0.043
+    ]
+   },
+   "mlp|k": {
+    "layer": 4,
+    "real": 0.914,
+    "noise": 0.954,
+    "delta": [
+     -0.031,
+     -0.044,
+     -0.021
+    ]
+   },
+   "mlp|dt": {
+    "layer": 8,
+    "real": 0.39,
+    "noise": -0.007,
+    "delta": [
+     0.411,
+     0.34,
+     0.442
+    ],
+    "reader": 0.393,
+    "minus_reader": [
+     0.014,
+     0.001,
+     0.029
+    ]
+   },
+   "mlp|m_perp": {
+    "layer": 12,
+    "real": 0.046,
+    "noise": -0.024,
+    "delta": [
+     0.085,
+     -0.013,
+     0.162
+    ],
+    "running_sum": 0.157,
+    "minus_running_sum": [
+     -0.125,
+     -0.197,
+     -0.01
+    ],
+    "position_only": 0.037
+   }
+  },
+  "timemoe-50m|iid|0.7": {
+   "ridge|k": {
+    "layer": 11,
+    "real": 0.891,
+    "noise": 0.945,
+    "delta": [
+     -0.056,
+     -0.066,
+     -0.043
+    ]
+   },
+   "ridge|dt": {
+    "layer": 8,
+    "real": 0.396,
+    "noise": 0.002,
+    "delta": [
+     0.388,
+     0.271,
+     0.475
+    ],
+    "reader": 0.364,
+    "minus_reader": [
+     0.007,
+     -0.013,
+     0.034
+    ],
+    "per_draw_median": [
+     0.392,
+     0.381,
+     0.419
+    ]
+   },
+   "ridge|m_perp": {
+    "layer": 5,
+    "real": 0.095,
+    "noise": -0.012,
+    "delta": [
+     0.125,
+     0.09,
+     0.161
+    ],
+    "running_sum": 0.181,
+    "minus_running_sum": [
+     -0.066,
+     -0.162,
+     -0.013
+    ],
+    "running_sum_raw": 0.148,
+    "minus_running_sum_raw": [
+     -0.062,
+     -0.138,
+     0.009
+    ],
+    "position_only": 0.042,
+    "per_draw_median": [
+     0.088,
+     0.122,
+     0.087
+    ]
+   },
+   "mlp|k": {
+    "layer": 4,
+    "real": 0.928,
+    "noise": 0.96,
+    "delta": [
+     -0.031,
+     -0.036,
+     -0.017
+    ]
+   },
+   "mlp|dt": {
+    "layer": 6,
+    "real": 0.423,
+    "noise": -0.005,
+    "delta": [
+     0.412,
+     0.353,
+     0.511
+    ],
+    "reader": 0.377,
+    "minus_reader": [
+     0.023,
+     0.009,
+     0.033
+    ]
+   },
+   "mlp|m_perp": {
+    "layer": 7,
+    "real": 0.123,
+    "noise": 0.012,
+    "delta": [
+     0.085,
+     0.037,
+     0.139
+    ],
+    "running_sum": 0.172,
+    "minus_running_sum": [
+     -0.015,
+     -0.138,
+     0.047
+    ],
+    "position_only": 0.042
+   }
+  },
+  "timemoe-50m|block|0.5": {
+   "ridge|k": {
+    "layer": 5,
+    "real": 0.885,
+    "noise": 0.942,
+    "delta": [
+     -0.048,
+     -0.065,
+     -0.038
+    ]
+   },
+   "ridge|dt": {
+    "layer": 4,
+    "real": 0.593,
+    "noise": -0.001,
+    "delta": [
+     0.622,
+     0.452,
+     0.667
+    ],
+    "reader": 0.473,
+    "minus_reader": [
+     0.064,
+     0.042,
+     0.083
+    ],
+    "per_draw_median": [
+     0.554,
+     0.584,
+     0.595
+    ]
+   },
+   "ridge|m_perp": {
+    "layer": 5,
+    "real": 0.231,
+    "noise": -0.02,
+    "delta": [
+     0.211,
+     0.162,
+     0.272
+    ],
+    "running_sum": 0.241,
+    "minus_running_sum": [
+     -0.043,
+     -0.137,
+     -0.004
+    ],
+    "running_sum_raw": 0.246,
+    "minus_running_sum_raw": [
+     -0.056,
+     -0.157,
+     0.018
+    ],
+    "position_only": -0.036,
+    "per_draw_median": [
+     0.215,
+     0.152,
+     0.257
+    ]
+   },
+   "mlp|k": {
+    "layer": 6,
+    "real": 0.877,
+    "noise": 0.943,
+    "delta": [
+     -0.056,
+     -0.079,
+     -0.043
+    ]
+   },
+   "mlp|dt": {
+    "layer": 7,
+    "real": 0.624,
+    "noise": 0.0,
+    "delta": [
+     0.601,
+     0.468,
+     0.654
+    ],
+    "reader": 0.56,
+    "minus_reader": [
+     0.028,
+     0.004,
+     0.052
+    ]
+   },
+   "mlp|m_perp": {
+    "layer": 6,
+    "real": 0.243,
+    "noise": -0.023,
+    "delta": [
+     0.216,
+     0.176,
+     0.317
+    ],
+    "running_sum": 0.506,
+    "minus_running_sum": [
+     -0.191,
+     -0.25,
+     -0.143
+    ],
+    "position_only": -0.036
+   }
+  },
+  "timemoe-50m|block|0.7": {
+   "ridge|k": {
+    "layer": 7,
+    "real": 0.894,
+    "noise": 0.94,
+    "delta": [
+     -0.042,
+     -0.049,
+     -0.028
+    ]
+   },
+   "ridge|dt": {
+    "layer": 4,
+    "real": 0.559,
+    "noise": 0.024,
+    "delta": [
+     0.538,
+     0.414,
+     0.58
+    ],
+    "reader": 0.506,
+    "minus_reader": [
+     0.031,
+     0.007,
+     0.052
+    ],
+    "per_draw_median": [
+     0.584,
+     0.555,
+     0.553
+    ]
+   },
+   "ridge|m_perp": {
+    "layer": 5,
+    "real": 0.164,
+    "noise": -0.021,
+    "delta": [
+     0.212,
+     0.118,
+     0.249
+    ],
+    "running_sum": 0.309,
+    "minus_running_sum": [
+     -0.171,
+     -0.227,
+     -0.098
+    ],
+    "running_sum_raw": 0.316,
+    "minus_running_sum_raw": [
+     -0.133,
+     -0.241,
+     -0.1
+    ],
+    "position_only": 0.081,
+    "per_draw_median": [
+     0.203,
+     0.155,
+     0.2
+    ]
+   },
+   "mlp|k": {
+    "layer": 4,
+    "real": 0.913,
+    "noise": 0.955,
+    "delta": [
+     -0.029,
+     -0.045,
+     -0.022
+    ]
+   },
+   "mlp|dt": {
+    "layer": 4,
+    "real": 0.576,
+    "noise": 0.009,
+    "delta": [
+     0.589,
+     0.464,
+     0.616
+    ],
+    "reader": 0.566,
+    "minus_reader": [
+     0.019,
+     0.009,
+     0.028
+    ]
+   },
+   "mlp|m_perp": {
+    "layer": 8,
+    "real": 0.192,
+    "noise": -0.018,
+    "delta": [
+     0.234,
+     0.164,
+     0.287
+    ],
+    "running_sum": 0.43,
+    "minus_running_sum": [
+     -0.22,
+     -0.27,
+     -0.166
+    ],
+    "position_only": 0.081
+   }
+  },
+  "timemoe-50m|mnar|0.5": {
+   "ridge|k": {
+    "layer": 11,
+    "real": 0.881,
+    "noise": 0.949,
+    "delta": [
+     -0.061,
+     -0.071,
+     -0.048
+    ]
+   },
+   "ridge|dt": {
+    "layer": 3,
+    "real": 0.568,
+    "noise": 0.023,
+    "delta": [
+     0.516,
+     0.467,
+     0.588
+    ],
+    "reader": 0.468,
+    "minus_reader": [
+     0.083,
+     0.046,
+     0.112
+    ],
+    "per_draw_median": [
+     0.567,
+     0.517,
+     0.545
+    ]
+   },
+   "ridge|m_perp": {
+    "layer": 9,
+    "real": 0.541,
+    "noise": 0.034,
+    "delta": [
+     0.465,
+     0.347,
+     0.553
+    ],
+    "running_sum": 0.8,
+    "minus_running_sum": [
+     -0.192,
+     -0.245,
+     -0.137
+    ],
+    "running_sum_raw": 0.801,
+    "minus_running_sum_raw": [
+     -0.204,
+     -0.257,
+     -0.134
+    ],
+    "position_only": 0.049,
+    "per_draw_median": [
+     0.546,
+     0.558,
+     0.558
+    ]
+   },
+   "mlp|k": {
+    "layer": 4,
+    "real": 0.926,
+    "noise": 0.954,
+    "delta": [
+     -0.029,
+     -0.036,
+     -0.015
+    ]
+   },
+   "mlp|dt": {
+    "layer": 4,
+    "real": 0.559,
+    "noise": 0.019,
+    "delta": [
+     0.509,
+     0.433,
+     0.572
+    ],
+    "reader": 0.61,
+    "minus_reader": [
+     -0.027,
+     -0.041,
+     -0.006
+    ]
+   },
+   "mlp|m_perp": {
+    "layer": 4,
+    "real": 0.566,
+    "noise": 0.071,
+    "delta": [
+     0.538,
+     0.445,
+     0.618
+    ],
+    "running_sum": 0.916,
+    "minus_running_sum": [
+     -0.21,
+     -0.256,
+     -0.174
+    ],
+    "position_only": 0.049
+   }
+  },
+  "timemoe-50m|mnar|0.7": {
+   "ridge|k": {
+    "layer": 10,
+    "real": 0.889,
+    "noise": 0.947,
+    "delta": [
+     -0.059,
+     -0.067,
+     -0.051
+    ]
+   },
+   "ridge|dt": {
+    "layer": 3,
+    "real": 0.531,
+    "noise": 0.013,
+    "delta": [
+     0.494,
+     0.447,
+     0.554
+    ],
+    "reader": 0.482,
+    "minus_reader": [
+     0.032,
+     -0.003,
+     0.048
+    ],
+    "per_draw_median": [
+     0.53,
+     0.543,
+     0.535
+    ]
+   },
+   "ridge|m_perp": {
+    "layer": 4,
+    "real": 0.564,
+    "noise": 0.009,
+    "delta": [
+     0.523,
+     0.424,
+     0.596
+    ],
+    "running_sum": 0.806,
+    "minus_running_sum": [
+     -0.183,
+     -0.223,
+     -0.161
+    ],
+    "running_sum_raw": 0.799,
+    "minus_running_sum_raw": [
+     -0.197,
+     -0.254,
+     -0.16
+    ],
+    "position_only": 0.057,
+    "per_draw_median": [
+     0.542,
+     0.546,
+     0.614
+    ]
+   },
+   "mlp|k": {
+    "layer": 4,
+    "real": 0.921,
+    "noise": 0.957,
+    "delta": [
+     -0.035,
+     -0.042,
+     -0.024
+    ]
+   },
+   "mlp|dt": {
+    "layer": 4,
+    "real": 0.576,
+    "noise": -0.002,
+    "delta": [
+     0.473,
+     0.455,
+     0.563
+    ],
+    "reader": 0.589,
+    "minus_reader": [
+     -0.018,
+     -0.036,
+     -0.001
+    ]
+   },
+   "mlp|m_perp": {
+    "layer": 4,
+    "real": 0.569,
+    "noise": 0.009,
+    "delta": [
+     0.5,
+     0.404,
+     0.609
+    ],
+    "running_sum": 0.846,
+    "minus_running_sum": [
+     -0.227,
+     -0.261,
+     -0.163
+    ],
+    "position_only": 0.057
+   }
+  },
+  "bolt-base|iid|0.5": {
+   "ridge|k": {
+    "layer": 12,
+    "real": 0.931,
+    "noise": 0.989,
+    "delta": [
+     -0.058,
+     -0.076,
+     -0.05
+    ]
+   },
+   "ridge|dt": {
+    "layer": 0,
+    "real": 0.15,
+    "noise": 0.145,
+    "delta": [
+     0.048,
+     -0.056,
+     0.083
+    ],
+    "reader": 0.213,
+    "minus_reader": [
+     -0.057,
+     -0.127,
+     -0.033
+    ],
+    "per_draw_median": [
+     0.246,
+     0.158,
+     0.251
+    ]
+   },
+   "ridge|m_perp": {
+    "layer": 2,
+    "real": 0.051,
+    "noise": -0.044,
+    "delta": [
+     0.048,
+     -0.003,
+     0.126
+    ],
+    "running_sum": 0.101,
+    "minus_running_sum": [
+     -0.113,
+     -0.161,
+     0.024
+    ],
+    "position_only": -0.008,
+    "per_draw_median": [
+     0.007,
+     0.096,
+     0.04
+    ]
+   },
+   "mlp|k": {
+    "layer": 12,
+    "real": 0.938,
+    "noise": 0.956,
+    "delta": [
+     -0.018,
+     -0.026,
+     -0.006
+    ]
+   },
+   "mlp|dt": {
+    "layer": 6,
+    "real": 0.268,
+    "noise": 0.18,
+    "delta": [
+     0.04,
+     -0.015,
+     0.078
+    ],
+    "reader": 0.176,
+    "minus_reader": [
+     -0.045,
+     -0.066,
+     0.039
+    ]
+   },
+   "mlp|m_perp": {
+    "layer": 8,
+    "real": 0.073,
+    "noise": 0.005,
+    "delta": [
+     0.049,
+     -0.022,
+     0.126
+    ],
+    "running_sum": 0.15,
+    "minus_running_sum": [
+     -0.106,
+     -0.215,
+     0.014
+    ],
+    "position_only": -0.008
+   }
+  },
+  "bolt-base|iid|0.7": {
+   "ridge|k": {
+    "layer": 11,
+    "real": 0.961,
+    "noise": 0.994,
+    "delta": [
+     -0.033,
+     -0.048,
+     -0.025
+    ]
+   },
+   "ridge|dt": {
+    "layer": 0,
+    "real": 0.63,
+    "noise": 0.525,
+    "delta": [
+     0.102,
+     0.051,
+     0.121
+    ],
+    "reader": 0.639,
+    "minus_reader": [
+     -0.015,
+     -0.051,
+     0.019
+    ],
+    "per_draw_median": [
+     0.644,
+     0.575,
+     0.658
+    ]
+   },
+   "ridge|m_perp": {
+    "layer": 4,
+    "real": 0.12,
+    "noise": -0.114,
+    "delta": [
+     0.146,
+     0.088,
+     0.26
+    ],
+    "running_sum": 0.13,
+    "minus_running_sum": [
+     -0.051,
+     -0.131,
+     0.072
+    ],
+    "position_only": -0.06,
+    "per_draw_median": [
+     0.14,
+     0.119,
+     0.024
+    ]
+   },
+   "mlp|k": {
+    "layer": 12,
+    "real": 0.97,
+    "noise": 0.975,
+    "delta": [
+     -0.004,
+     -0.014,
+     0.003
+    ]
+   },
+   "mlp|dt": {
+    "layer": 9,
+    "real": 0.58,
+    "noise": 0.558,
+    "delta": [
+     -0.017,
+     -0.039,
+     0.032
+    ],
+    "reader": 0.643,
+    "minus_reader": [
+     -0.047,
+     -0.074,
+     -0.016
+    ]
+   },
+   "mlp|m_perp": {
+    "layer": 9,
+    "real": 0.172,
+    "noise": -0.006,
+    "delta": [
+     0.184,
+     0.089,
+     0.26
+    ],
+    "running_sum": 0.214,
+    "minus_running_sum": [
+     -0.065,
+     -0.229,
+     0.042
+    ],
+    "position_only": -0.06
+   }
+  },
+  "bolt-base|block|0.5": {
+   "ridge|k": {
+    "layer": 12,
+    "real": 0.931,
+    "noise": 0.987,
+    "delta": [
+     -0.053,
+     -0.068,
+     -0.047
+    ]
+   },
+   "ridge|dt": {
+    "layer": 2,
+    "real": 0.466,
+    "noise": 0.153,
+    "delta": [
+     0.297,
+     0.219,
+     0.368
+    ],
+    "reader": 0.532,
+    "minus_reader": [
+     -0.003,
+     -0.064,
+     0.052
+    ],
+    "per_draw_median": [
+     0.49,
+     0.451,
+     0.503
+    ]
+   },
+   "ridge|m_perp": {
+    "layer": 9,
+    "real": 0.19,
+    "noise": -0.069,
+    "delta": [
+     0.206,
+     0.147,
+     0.304
+    ],
+    "running_sum": 0.398,
+    "minus_running_sum": [
+     -0.203,
+     -0.361,
+     -0.048
+    ],
+    "position_only": -0.078,
+    "per_draw_median": [
+     0.263,
+     0.209,
+     0.194
+    ]
+   },
+   "mlp|k": {
+    "layer": 9,
+    "real": 0.937,
+    "noise": 0.94,
+    "delta": [
+     -0.0,
+     -0.016,
+     0.018
+    ]
+   },
+   "mlp|dt": {
+    "layer": 6,
+    "real": 0.578,
+    "noise": 0.231,
+    "delta": [
+     0.275,
+     0.19,
+     0.339
+    ],
+    "reader": 0.575,
+    "minus_reader": [
+     -0.024,
+     -0.075,
+     0.02
+    ]
+   },
+   "mlp|m_perp": {
+    "layer": 9,
+    "real": 0.29,
+    "noise": 0.003,
+    "delta": [
+     0.289,
+     0.206,
+     0.395
+    ],
+    "running_sum": 0.512,
+    "minus_running_sum": [
+     -0.141,
+     -0.255,
+     -0.085
+    ],
+    "position_only": -0.078
+   }
+  },
+  "bolt-base|block|0.7": {
+   "ridge|k": {
+    "layer": 12,
+    "real": 0.924,
+    "noise": 0.989,
+    "delta": [
+     -0.064,
+     -0.098,
+     -0.05
+    ]
+   },
+   "ridge|dt": {
+    "layer": 1,
+    "real": 0.452,
+    "noise": 0.135,
+    "delta": [
+     0.233,
+     0.082,
+     0.391
+    ],
+    "reader": 0.473,
+    "minus_reader": [
+     0.029,
+     -0.092,
+     0.058
+    ],
+    "per_draw_median": [
+     0.476,
+     0.493,
+     0.363
+    ]
+   },
+   "ridge|m_perp": {
+    "layer": 1,
+    "real": 0.203,
+    "noise": -0.025,
+    "delta": [
+     0.237,
+     0.106,
+     0.314
+    ],
+    "running_sum": 0.381,
+    "minus_running_sum": [
+     -0.14,
+     -0.249,
+     -0.076
+    ],
+    "position_only": 0.105,
+    "per_draw_median": [
+     0.287,
+     0.131,
+     0.168
+    ]
+   },
+   "mlp|k": {
+    "layer": 12,
+    "real": 0.961,
+    "noise": 0.966,
+    "delta": [
+     -0.006,
+     -0.015,
+     0.002
+    ]
+   },
+   "mlp|dt": {
+    "layer": 4,
+    "real": 0.509,
+    "noise": 0.203,
+    "delta": [
+     0.272,
+     0.086,
+     0.353
+    ],
+    "reader": 0.507,
+    "minus_reader": [
+     -0.008,
+     -0.08,
+     0.043
+    ]
+   },
+   "mlp|m_perp": {
+    "layer": 9,
+    "real": 0.243,
+    "noise": -0.028,
+    "delta": [
+     0.306,
+     0.207,
+     0.422
+    ],
+    "running_sum": 0.423,
+    "minus_running_sum": [
+     -0.142,
+     -0.261,
+     -0.113
+    ],
+    "position_only": 0.105
+   }
+  },
+  "bolt-base|mnar|0.5": {
+   "ridge|k": {
+    "layer": 12,
+    "real": 0.935,
+    "noise": 0.989,
+    "delta": [
+     -0.053,
+     -0.062,
+     -0.047
+    ]
+   },
+   "ridge|dt": {
+    "layer": 0,
+    "real": 0.825,
+    "noise": 0.111,
+    "delta": [
+     0.657,
+     0.554,
+     0.748
+    ],
+    "reader": 0.753,
+    "minus_reader": [
+     0.052,
+     0.015,
+     0.076
+    ],
+    "per_draw_median": [
+     0.825,
+     0.797,
+     0.829
+    ]
+   },
+   "ridge|m_perp": {
+    "layer": 3,
+    "real": 0.718,
+    "noise": 0.034,
+    "delta": [
+     0.64,
+     0.526,
+     0.718
+    ],
+    "running_sum": 0.837,
+    "minus_running_sum": [
+     -0.084,
+     -0.13,
+     -0.035
+    ],
+    "position_only": 0.025,
+    "per_draw_median": [
+     0.694,
+     0.672,
+     0.688
+    ]
+   },
+   "mlp|k": {
+    "layer": 9,
+    "real": 0.956,
+    "noise": 0.946,
+    "delta": [
+     0.006,
+     -0.0,
+     0.019
+    ]
+   },
+   "mlp|dt": {
+    "layer": 4,
+    "real": 0.85,
+    "noise": 0.156,
+    "delta": [
+     0.605,
+     0.522,
+     0.734
+    ],
+    "reader": 0.828,
+    "minus_reader": [
+     0.008,
+     -0.017,
+     0.022
+    ]
+   },
+   "mlp|m_perp": {
+    "layer": 6,
+    "real": 0.757,
+    "noise": 0.026,
+    "delta": [
+     0.699,
+     0.574,
+     0.766
+    ],
+    "running_sum": 0.886,
+    "minus_running_sum": [
+     -0.107,
+     -0.156,
+     -0.077
+    ],
+    "position_only": 0.025
+   }
+  },
+  "bolt-base|mnar|0.7": {
+   "ridge|k": {
+    "layer": 12,
+    "real": 0.953,
+    "noise": 0.994,
+    "delta": [
+     -0.04,
+     -0.046,
+     -0.034
+    ]
+   },
+   "ridge|dt": {
+    "layer": 0,
+    "real": 0.694,
+    "noise": -0.003,
+    "delta": [
+     0.695,
+     0.461,
+     0.85
+    ],
+    "reader": 0.721,
+    "minus_reader": [
+     0.012,
+     -0.067,
+     0.028
+    ],
+    "per_draw_median": [
+     0.707,
+     0.749,
+     0.714
+    ]
+   },
+   "ridge|m_perp": {
+    "layer": 6,
+    "real": 0.485,
+    "noise": 0.009,
+    "delta": [
+     0.452,
+     0.202,
+     0.684
+    ],
+    "running_sum": 0.795,
+    "minus_running_sum": [
+     -0.246,
+     -0.316,
+     -0.186
+    ],
+    "position_only": 0.051,
+    "per_draw_median": [
+     0.481,
+     0.474,
+     0.503
+    ]
+   },
+   "mlp|k": {
+    "layer": 12,
+    "real": 0.98,
+    "noise": 0.974,
+    "delta": [
+     0.003,
+     -0.003,
+     0.011
+    ]
+   },
+   "mlp|dt": {
+    "layer": 4,
+    "real": 0.788,
+    "noise": 0.017,
+    "delta": [
+     0.643,
+     0.553,
+     0.791
+    ],
+    "reader": 0.8,
+    "minus_reader": [
+     -0.023,
+     -0.051,
+     0.022
+    ]
+   },
+   "mlp|m_perp": {
+    "layer": 4,
+    "real": 0.771,
+    "noise": -0.031,
+    "delta": [
+     0.66,
+     0.489,
+     0.857
+    ],
+    "running_sum": 0.87,
+    "minus_running_sum": [
+     -0.073,
+     -0.099,
+     -0.018
+    ],
+    "position_only": 0.051
+   }
+  },
+  "chronos-2|iid|0.5": {
+   "ridge|k": {
+    "layer": 6,
+    "real": 0.977,
+    "noise": 0.994,
+    "delta": [
+     -0.018,
+     -0.02,
+     -0.015
+    ]
+   },
+   "ridge|dt": {
+    "layer": 1,
+    "real": 0.21,
+    "noise": 0.135,
+    "delta": [
+     0.133,
+     0.019,
+     0.157
+    ],
+    "reader": 0.213,
+    "minus_reader": [
+     -0.082,
+     -0.132,
+     -0.028
+    ],
+    "per_draw_median": [
+     0.207,
+     0.274,
+     0.256
+    ]
+   },
+   "ridge|m_perp": {
+    "layer": 0,
+    "real": -0.001,
+    "noise": -0.032,
+    "delta": [
+     0.086,
+     -0.05,
+     0.123
+    ],
+    "running_sum": 0.101,
+    "minus_running_sum": [
+     -0.138,
+     -0.273,
+     0.034
+    ],
+    "position_only": -0.008,
+    "per_draw_median": [
+     -0.026,
+     -0.006,
+     -0.031
+    ]
+   },
+   "mlp|k": {
+    "layer": 8,
+    "real": 0.957,
+    "noise": 0.987,
+    "delta": [
+     -0.032,
+     -0.039,
+     -0.025
+    ]
+   },
+   "mlp|dt": {
+    "layer": 6,
+    "real": 0.299,
+    "noise": 0.108,
+    "delta": [
+     0.09,
+     0.006,
+     0.149
+    ],
+    "reader": 0.176,
+    "minus_reader": [
+     -0.015,
+     -0.052,
+     0.036
+    ]
+   },
+   "mlp|m_perp": {
+    "layer": 12,
+    "real": 0.023,
+    "noise": -0.022,
+    "delta": [
+     0.007,
+     -0.079,
+     0.07
+    ],
+    "running_sum": 0.15,
+    "minus_running_sum": [
+     -0.142,
+     -0.255,
+     -0.033
+    ],
+    "position_only": -0.008
+   }
+  },
+  "chronos-2|iid|0.7": {
+   "ridge|k": {
+    "layer": 2,
+    "real": 0.981,
+    "noise": 0.994,
+    "delta": [
+     -0.011,
+     -0.02,
+     -0.008
+    ]
+   },
+   "ridge|dt": {
+    "layer": 0,
+    "real": 0.559,
+    "noise": 0.466,
+    "delta": [
+     0.074,
+     -0.004,
+     0.129
+    ],
+    "reader": 0.639,
+    "minus_reader": [
+     -0.07,
+     -0.111,
+     -0.031
+    ],
+    "per_draw_median": [
+     0.586,
+     0.533,
+     0.573
+    ]
+   },
+   "ridge|m_perp": {
+    "layer": 3,
+    "real": 0.137,
+    "noise": 0.053,
+    "delta": [
+     0.016,
+     -0.051,
+     0.157
+    ],
+    "running_sum": 0.13,
+    "minus_running_sum": [
+     0.056,
+     -0.068,
+     0.138
+    ],
+    "position_only": -0.06,
+    "per_draw_median": [
+     0.193,
+     0.113,
+     0.042
+    ]
+   },
+   "mlp|k": {
+    "layer": 8,
+    "real": 0.953,
+    "noise": 0.987,
+    "delta": [
+     -0.032,
+     -0.039,
+     -0.025
+    ]
+   },
+   "mlp|dt": {
+    "layer": 8,
+    "real": 0.605,
+    "noise": 0.591,
+    "delta": [
+     0.073,
+     0.007,
+     0.095
+    ],
+    "reader": 0.643,
+    "minus_reader": [
+     -0.013,
+     -0.058,
+     0.022
+    ]
+   },
+   "mlp|m_perp": {
+    "layer": 4,
+    "real": 0.229,
+    "noise": -0.043,
+    "delta": [
+     0.268,
+     0.095,
+     0.328
+    ],
+    "running_sum": 0.214,
+    "minus_running_sum": [
+     -0.011,
+     -0.118,
+     0.117
+    ],
+    "position_only": -0.06
+   }
+  },
+  "chronos-2|block|0.5": {
+   "ridge|k": {
+    "layer": 5,
+    "real": 0.98,
+    "noise": 0.995,
+    "delta": [
+     -0.016,
+     -0.017,
+     -0.013
+    ]
+   },
+   "ridge|dt": {
+    "layer": 1,
+    "real": 0.444,
+    "noise": 0.138,
+    "delta": [
+     0.221,
+     0.16,
+     0.36
+    ],
+    "reader": 0.532,
+    "minus_reader": [
+     -0.051,
+     -0.093,
+     -0.009
+    ],
+    "per_draw_median": [
+     0.529,
+     0.456,
+     0.429
+    ]
+   },
+   "ridge|m_perp": {
+    "layer": 6,
+    "real": 0.12,
+    "noise": -0.034,
+    "delta": [
+     0.184,
+     0.087,
+     0.233
+    ],
+    "running_sum": 0.398,
+    "minus_running_sum": [
+     -0.24,
+     -0.355,
+     -0.136
+    ],
+    "position_only": -0.078,
+    "per_draw_median": [
+     0.14,
+     0.134,
+     0.16
+    ]
+   },
+   "mlp|k": {
+    "layer": 8,
+    "real": 0.96,
+    "noise": 0.987,
+    "delta": [
+     -0.027,
+     -0.034,
+     -0.023
+    ]
+   },
+   "mlp|dt": {
+    "layer": 6,
+    "real": 0.597,
+    "noise": 0.281,
+    "delta": [
+     0.265,
+     0.154,
+     0.313
+    ],
+    "reader": 0.575,
+    "minus_reader": [
+     -0.004,
+     -0.042,
+     0.026
+    ]
+   },
+   "mlp|m_perp": {
+    "layer": 4,
+    "real": 0.333,
+    "noise": -0.025,
+    "delta": [
+     0.368,
+     0.281,
+     0.438
+    ],
+    "running_sum": 0.512,
+    "minus_running_sum": [
+     -0.125,
+     -0.236,
+     -0.042
+    ],
+    "position_only": -0.078
+   }
+  },
+  "chronos-2|block|0.7": {
+   "ridge|k": {
+    "layer": 6,
+    "real": 0.967,
+    "noise": 0.993,
+    "delta": [
+     -0.026,
+     -0.032,
+     -0.019
+    ]
+   },
+   "ridge|dt": {
+    "layer": 0,
+    "real": 0.355,
+    "noise": 0.135,
+    "delta": [
+     0.222,
+     0.074,
+     0.277
+    ],
+    "reader": 0.473,
+    "minus_reader": [
+     -0.112,
+     -0.182,
+     -0.038
+    ],
+    "per_draw_median": [
+     0.47,
+     0.327,
+     0.379
+    ]
+   },
+   "ridge|m_perp": {
+    "layer": 2,
+    "real": 0.143,
+    "noise": -0.023,
+    "delta": [
+     0.271,
+     0.056,
+     0.322
+    ],
+    "running_sum": 0.381,
+    "minus_running_sum": [
+     -0.202,
+     -0.24,
+     -0.135
+    ],
+    "position_only": 0.105,
+    "per_draw_median": [
+     0.169,
+     0.137,
+     0.246
+    ]
+   },
+   "mlp|k": {
+    "layer": 8,
+    "real": 0.957,
+    "noise": 0.984,
+    "delta": [
+     -0.029,
+     -0.035,
+     -0.017
+    ]
+   },
+   "mlp|dt": {
+    "layer": 4,
+    "real": 0.594,
+    "noise": 0.276,
+    "delta": [
+     0.274,
+     0.218,
+     0.405
+    ],
+    "reader": 0.507,
+    "minus_reader": [
+     -0.015,
+     -0.027,
+     0.091
+    ]
+   },
+   "mlp|m_perp": {
+    "layer": 8,
+    "real": 0.315,
+    "noise": 0.02,
+    "delta": [
+     0.274,
+     0.18,
+     0.37
+    ],
+    "running_sum": 0.423,
+    "minus_running_sum": [
+     -0.151,
+     -0.246,
+     -0.054
+    ],
+    "position_only": 0.105
+   }
+  },
+  "chronos-2|mnar|0.5": {
+   "ridge|k": {
+    "layer": 5,
+    "real": 0.98,
+    "noise": 0.995,
+    "delta": [
+     -0.015,
+     -0.018,
+     -0.012
+    ]
+   },
+   "ridge|dt": {
+    "layer": 1,
+    "real": 0.76,
+    "noise": 0.076,
+    "delta": [
+     0.677,
+     0.584,
+     0.744
+    ],
+    "reader": 0.753,
+    "minus_reader": [
+     0.018,
+     -0.024,
+     0.059
+    ],
+    "per_draw_median": [
+     0.766,
+     0.788,
+     0.794
+    ]
+   },
+   "ridge|m_perp": {
+    "layer": 1,
+    "real": 0.676,
+    "noise": 0.012,
+    "delta": [
+     0.682,
+     0.558,
+     0.781
+    ],
+    "running_sum": 0.837,
+    "minus_running_sum": [
+     -0.102,
+     -0.155,
+     -0.073
+    ],
+    "position_only": 0.025,
+    "per_draw_median": [
+     0.732,
+     0.625,
+     0.656
+    ]
+   },
+   "mlp|k": {
+    "layer": 8,
+    "real": 0.98,
+    "noise": 0.988,
+    "delta": [
+     -0.007,
+     -0.012,
+     -0.005
+    ]
+   },
+   "mlp|dt": {
+    "layer": 12,
+    "real": 0.818,
+    "noise": 0.112,
+    "delta": [
+     0.691,
+     0.488,
+     0.804
+    ],
+    "reader": 0.828,
+    "minus_reader": [
+     -0.006,
+     -0.04,
+     0.018
+    ]
+   },
+   "mlp|m_perp": {
+    "layer": 8,
+    "real": 0.661,
+    "noise": 0.007,
+    "delta": [
+     0.641,
+     0.557,
+     0.73
+    ],
+    "running_sum": 0.886,
+    "minus_running_sum": [
+     -0.142,
+     -0.201,
+     -0.064
+    ],
+    "position_only": 0.025
+   }
+  },
+  "chronos-2|mnar|0.7": {
+   "ridge|k": {
+    "layer": 2,
+    "real": 0.982,
+    "noise": 0.994,
+    "delta": [
+     -0.012,
+     -0.014,
+     -0.007
+    ]
+   },
+   "ridge|dt": {
+    "layer": 0,
+    "real": 0.704,
+    "noise": 0.037,
+    "delta": [
+     0.658,
+     0.452,
+     0.8
+    ],
+    "reader": 0.721,
+    "minus_reader": [
+     -0.039,
+     -0.098,
+     0.014
+    ],
+    "per_draw_median": [
+     0.615,
+     0.723,
+     0.713
+    ]
+   },
+   "ridge|m_perp": {
+    "layer": 1,
+    "real": 0.629,
+    "noise": -0.001,
+    "delta": [
+     0.586,
+     0.411,
+     0.733
+    ],
+    "running_sum": 0.795,
+    "minus_running_sum": [
+     -0.094,
+     -0.163,
+     -0.034
+    ],
+    "position_only": 0.051,
+    "per_draw_median": [
+     0.664,
+     0.673,
+     0.705
+    ]
+   },
+   "mlp|k": {
+    "layer": 8,
+    "real": 0.973,
+    "noise": 0.985,
+    "delta": [
+     -0.01,
+     -0.016,
+     -0.004
+    ]
+   },
+   "mlp|dt": {
+    "layer": 2,
+    "real": 0.776,
+    "noise": 0.083,
+    "delta": [
+     0.651,
+     0.547,
+     0.83
+    ],
+    "reader": 0.8,
+    "minus_reader": [
+     -0.028,
+     -0.056,
+     0.011
+    ]
+   },
+   "mlp|m_perp": {
+    "layer": 4,
+    "real": 0.716,
+    "noise": -0.008,
+    "delta": [
+     0.679,
+     0.508,
+     0.738
+    ],
+    "running_sum": 0.87,
+    "minus_running_sum": [
+     -0.096,
+     -0.14,
+     -0.035
+    ],
+    "position_only": 0.051
+   }
+  }
+ }
+}
