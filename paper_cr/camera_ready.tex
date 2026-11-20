@@ -5,6 +5,7 @@
 
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
+\usepackage{courier}
 \usepackage{hyperref}
 \usepackage{url}
 \usepackage{booktabs}
@@ -15,8 +16,6 @@
 \usepackage{microtype}
 \usepackage{xcolor}
 \usepackage{graphicx}
-\usepackage{xspace}
-\usepackage{enumitem}
 
 \newcommand{\mperp}{m^{\perp}}
 \newcommand{\dt}{\Delta t}
@@ -128,12 +127,14 @@ The pipeline reproduces the original eight-series numbers (Appendix~\ref{app:rep
 \section{Elapsed time from white noise}
 \label{sec:trap}
 
-\begin{figure}[t]
+\begin{figure}[ht]
   \centering
   \includegraphics[width=\linewidth]{figures/fig1_trap.pdf}
-  \caption{Final-layer $r$ for $\mperp$ at $p = 0.5$, Chronos-T5 and Time-MoE, from white noise (filled) and real data (open).
-  Real and noise inputs score alike under every scheme.
-  Under random dropout and block outages the position-only oracle (dashed) is about 0, yet shuffled folds report $r \approx 0.65$ from noise.}
+  \caption{Final-layer $r$ for $\mperp$ at $p = 0.5$.
+  Filled marks are white noise and open marks are real data; triangles are Time-MoE and circles are Chronos-T5.
+  The dashed line is the position-only oracle.
+  Under the Beta keep, held-out Chronos-T5 noise matches that oracle.
+  Under random dropout and block outages the oracle is about 0, and shuffled folds still read $r = 0.63$--$0.71$ from noise.}
   \label{fig:trap}
 \end{figure}
 
@@ -150,25 +151,26 @@ Shuffled folds measure smoothness; held-out series leave the position geometry, 
 \section{What the corrected probes recover}
 \label{sec:ladder}
 
-\begin{figure}[t]
+\begin{figure}[ht]
   \centering
   \includegraphics[width=\linewidth]{figures/fig2_v2.pdf}
   \caption{Held-out ridge probes, three draws.
-  (a)~Position from noise, random dropout, $p = 0.5$.
-  (b)~Gap $\dt$ from real data; grey bars are the difference probe.
-  (c)~Elapsed time under value-dependent missingness, $p = 0.7$; grey bars are the running sum.}
+  (a)~Token position from white noise under random dropout at $p = 0.5$; open marks are the input layer.
+  (b)~Gap $\dt$ on real data at the same rate; grey ticks are the difference probe.
+  (c)~Elapsed time under value-dependent missingness at $p = 0.7$; grey ticks are the running sum.}
   \label{fig:ladder}
 \end{figure}
 
-\begin{table}[t]
-  \caption{Held-out ridge probes. The layer is chosen on 30\% of series and scored on the other 71.
-  Position is $r(k)$ from noise. Gap is real-minus-noise $\Delta r$ for $\dt$ under random dropout at $p = 0.5$, with a 95\% series-bootstrap interval.
-  The last three columns subtract the difference probe, then the running sum for $\mperp$ at $p = 0.7$.
-  A star means the interval excludes 0. MLP pairs are in Appendix~\ref{app:pairs}.}
+\begin{table}[ht]
+  \caption{Held-out ridge probes; the layer is chosen on 30\% of series.
+  Position is $r(k)$ from noise.
+  Gap is real-minus-noise $\Delta r$ for $\dt$ at random dropout $p = 0.5$, with a 95\% interval.
+  The remaining columns subtract the difference probe, then the running sum for $\mperp$ at $p = 0.7$.
+  A star excludes 0. MLP pairs are in Appendix~\ref{app:pairs}.}
   \label{tab:main}
   \centering
-  \footnotesize
-  \setlength{\tabcolsep}{3pt}
+  \small
+  \setlength{\tabcolsep}{3.5pt}
   \begin{tabular}{lccccc}
     \toprule
     Model & Position & Gap $\Delta r$ [95\% CI] & vs difference probe & Block & Value-dependent \\
@@ -217,13 +219,12 @@ Patch medians drop series with fewer than eight patches (about 22\% of cells).
 \section{Recommendations}
 \label{sec:recs}
 
-\begin{enumerate}[leftmargin=1.15em,itemsep=1pt,topsep=2pt,parsep=0pt]
-  \item Run the probe on white noise at the same kept steps.
-  \item Evaluate on held-out series.
-  \item Report the position-only oracle. A model that matches it is reading position.
-  \item Probe gaps and elapsed time separately.
-  \item Compare with a no-model baseline built from the features you claim the model uses. A baseline that sums the gaps tests whether the states expose that sum.
-\end{enumerate}
+(1)~Run the probe on white noise at the same kept steps.
+(2)~Evaluate on held-out series.
+(3)~Report the position-only oracle; a model that matches it is reading position.
+(4)~Probe gaps and elapsed time separately.
+(5)~Compare with a no-model baseline built from the features you claim the model uses.
+A baseline that sums the gaps tests whether the states expose that sum.
 
 \section{Limitations}
 \label{sec:limits}
@@ -241,7 +242,13 @@ Held-out series, matched-keep noise, and a position-only oracle expose both the 
 Position is available from noise, and one-token gap decoding sits near a no-model probe on local value changes.
 Where the values reveal the gaps, elapsed time is readable and a running sum of that probe reads more.
 Leaving the missing steps on the grid gives Chronos-T5, Chronos-Bolt, and Chronos-2 the spacing as input; whether they use it is untested.
-Code and per-series results: \href{https://github.com/AIpsychonaut/neurips-fmts-2026}{github.com/AIpsychonaut/neurips-fmts-2026}.
+Code and per-series results: \url{https://github.com/AIpsychonaut/neurips-fmts-2026}.
+
+\begin{ack}
+No external funding was received for this work.
+The author declares no competing interests.
+Claude (Anthropic) wrote experiment and analysis code and drafted text under the author's direction; the author checked the claims, numbers and citations.
+\end{ack}
 
 {\small
 \bibliographystyle{plainnat}
