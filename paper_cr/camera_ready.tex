@@ -5,7 +5,6 @@
 
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
-\usepackage{courier}
 \usepackage{hyperref}
 \usepackage{url}
 \usepackage{booktabs}
@@ -79,12 +78,12 @@ We read frozen public weights, including the input embedding.
 Chronos-T5 tiny through large~\citep{ansari2024chronos} are T5 encoder-decoders~\citep{raffel2020t5}: one quantized token per step, relative attention bias, no absolute position on the input.
 We read the encoder.
 The original audit used base; all five sizes are here.
-Chronos-Bolt-base is the same pattern on left-padded patches of 16.
+Chronos-Bolt-base~\citep{chronosbolt} is the same pattern on left-padded patches of 16.
 Chronos-2~\citep{ansari2025chronos2} is an encoder over the same patches; each step carries a mask and a time index in units of one over the maximum context length.
 In \texttt{chronos-forecasting}~2.3.2, a NaN left on the grid keeps its slot in all three: Chronos-T5 masks it as a padding token, and Bolt and Chronos-2 mark it in the mask channel, with Chronos-2's index still counting it.
 Our inputs contain no NaNs, so Chronos-2's index counts only kept steps.
 Time-MoE-50M~\citep{shi2025timemoe} is a causal decoder with one token per step and rotary embeddings.
-It has no NaN handling; its attention mask is for padding, and we did not test using it for missing steps.
+It has no NaN handling.
 Every model receives the dropped sequence: kept values in order, no timestamps, and no NaNs left on the grid.
 
 Data are the first training series of each UCR 2018 dataset~\citep{dau2019ucr}, truncated at 512, keeping the 102 series of length at least 128 with non-zero variance, then $z$-scored.
@@ -166,7 +165,7 @@ Shuffled folds measure smoothness; held-out series leave the position geometry, 
   Position is $r(k)$ from noise.
   Gap is real-minus-noise $\Delta r$ for $\dt$ at random dropout $p = 0.5$, with a 95\% interval.
   The remaining columns subtract the difference probe, then the running sum for $\mperp$ at $p = 0.7$.
-  A star excludes 0. MLP pairs are in Appendix~\ref{app:pairs}.}
+  A star marks an interval that excludes 0. MLP pairs are in Appendix~\ref{app:pairs}.}
   \label{tab:main}
   \centering
   \small
@@ -195,7 +194,6 @@ The analysis plan, written before the runs and released with the code, set the g
 On the planned draw, seven models passed and Chronos-2 did not.
 Over three draws the six one-token models still pass.
 Chronos-2's interval is then 0.13 [0.02, 0.16], and it now passes.
-Left padding makes patch gaps partly a function of position; the paired difference removes that positional part.
 Chronos-Bolt passed that draw under the old per-patch averages; under the last-observation target in Table~\ref{tab:main}, three draws give 0.05 [$-0.06$, 0.08].
 
 A difference probe on local input changes reaches $r = 0.42$ here (0.36 past-only).
@@ -247,7 +245,6 @@ Code and per-series results: \url{https://github.com/AIpsychonaut/neurips-fmts-2
 \begin{ack}
 No external funding was received for this work.
 The author declares no competing interests.
-Claude (Anthropic) wrote experiment and analysis code and drafted text under the author's direction; the author checked the claims, numbers and citations.
 \end{ack}
 
 {\small
