@@ -32,120 +32,86 @@
 \maketitle
 
 \begin{abstract}
-Dropping missing steps and passing the rest to a time series foundation model removes the clock: the 40th token may be the 40th reading or the 400th.
-A linear probe of elapsed time is the natural check.
-We show that a straightforward version answers incorrectly.
-After a skewed keep, elapsed time is still a curve of token position, and the probe reads that curve from white noise.
-Under random dropout and block outages, shuffled folds let the probe interpolate a smooth target, again from white noise.
+Time series foundation models (TSFMs) are often applied to series with missing observations by dropping the missing steps and passing the remaining values in order, so that the 40th token may be the 40th reading or the 400th.
+Linear probes are a natural way to ask whether the hidden states still reflect elapsed time, but we show that a straightforward probing protocol gives the wrong answer.
+Under a skewed keep law, elapsed time remains a nonlinear function of token position after its linear trend is removed, and the probe recovers it from white noise; under random dropout and block outages, shuffled folds within a series let the probe interpolate a smooth target, again from white noise.
 Held-out series, matched-keep white noise, and a position-only oracle separate the two failures.
-On eight models and 102 UCR series, every model decodes token position from white noise ($r \ge 0.94$).
-The planned gap test passes for most models, but at about the level of a no-model probe on local value changes.
-Where the values reveal the gaps, ridge readouts of elapsed time reach $r = 0.44$--$0.63$, and a running sum of a no-model gap probe is higher.
-We do not measure forecasts.
+On eight TSFMs and 102 UCR series, we find that every model encodes token position from white noise ($r \ge 0.94$), and that the planned gap test passes for most models but at about the level of a probe on local value changes that uses no model.
+Where the values reveal the gaps, ridge probes recover elapsed time at $r = 0.44$--$0.63$, while a running sum of that no-model gap probe does better.
+We do not evaluate forecasts.
 \end{abstract}
 
 \section{Introduction}
 \label{sec:intro}
 
-A sensor that stops when it saturates, or a metrics pipeline with outages, leaves an irregular history.
-Two situations pass the values in order with the gaps removed.
-Event logs and other series with no regular grid have no empty slot to keep.
-Pipelines also drop gaps before the model call.
-Chronos-T5, Chronos-Bolt, and Chronos-2 can take NaNs on the original grid; we study the dropped input.
-Models built for irregular series take a mask or the observation times directly~\citep{che2018grud,rubanova2019latent,kidger2020ncde,shukla2021mtan}.
+Real-world series are frequently irregular: a sensor may stop reporting when it saturates, and a metrics pipeline may go silent during an outage.
+A common way to apply a pretrained forecaster is to drop the missing steps and pass the observed values in order, because the data have no regular grid, as in event logs, or because the pipeline removes gaps before the model call.
+Models designed for irregular series instead take a mask or the observation times as input~\citep{che2018grud,rubanova2019latent,kidger2020ncde,shukla2021mtan}, and Chronos-T5, Chronos-Bolt, and Chronos-2 can all accept NaNs on the original grid; here we study the dropped input.
 
-Elapsed time rises with token position, so a probe can score well by reading position.
-Removing the linear trend in position leaves two failures (the ``dual collinearity'' of the original version).
-A skewed keep makes elapsed time a smooth curve of rank, and the curve survives.
-In a shuffled fold a test token's neighbours are usually in the training folds, so a smooth representation can interpolate a smooth target.
+Because elapsed time rises with token position, a probe can score well simply by reading position, and the usual remedy is to remove the linear trend in position from the target.
+This leaves two failures (the ``dual collinearity'' of the original version).
+First, a skewed keep law makes elapsed time a smooth nonlinear function of rank, and that curve survives the linear correction.
+Second, with shuffled folds inside a series, a test token's neighbours usually sit in the training folds, so any representation that varies smoothly along the sequence can interpolate a smooth target.
 In both cases the probe decodes elapsed time from white noise.
-A probe result needs a control the probe can solve without the property of interest~\citep{hewitt2019control}.
-The same separation is required before a hippocampal cell is said to encode time rather than distance~\citep{kraus2013time}.
+A probe result is only meaningful against a control that the probe can solve without the property of interest~\citep{hewitt2019control}, and the same separation is required before a hippocampal cell is said to encode time rather than distance~\citep{kraus2013time}.
 
-A linear probe asks whether the states still reflect elapsed time: regress each token's time on its hidden state and score held-out correlation~\citep{alain2017understanding,tenney2019bert,belinkov2022probing}.
-Time series foundation models have been probed for trend, periodicity, and internal temporal factors~\citep{wilinski2024exploring,pandey2025internal} and for dataset-level sampling cadence~\citep{mavani2026observability}.
-We know of no published study that probes elapsed time under missing observations with shuffled folds inside each series.
-Mavani et al.\ already use series-disjoint splits and probes on the raw input.
-We do not claim the protocol below is established practice.
-The first version of this analysis used it, on Chronos-T5-base and eight series, and its real-data correlations sat close to white noise.
-
-The rest of the paper reports those controls on the wider set of models, series, and missingness patterns requested in review.
+Linear probes, which regress a property on hidden states and score the held-out correlation~\citep{alain2017understanding,tenney2019bert,belinkov2022probing}, have been used on TSFMs to study trend, periodicity, and other temporal factors~\citep{wilinski2024exploring,pandey2025internal} and dataset-level sampling cadence~\citep{mavani2026observability}, the latter already with series-disjoint splits and probes on the raw input.
+We know of no published study that probes elapsed time under missing observations with shuffled folds inside each series, and we do not claim that this protocol is established practice: the first version of this analysis used it, on Chronos-T5-base and eight series, and its correlations on real data were close to those on white noise.
+The rest of the paper applies the controls above to the wider set of models, series, and missingness patterns requested in review.
 
 \section{Setup}
 \label{sec:setup}
 
-We read frozen public weights, including the input embedding.
-Chronos-T5 tiny through large~\citep{ansari2024chronos} are T5 encoder-decoders~\citep{raffel2020t5}: one quantized token per step, relative attention bias, no absolute position on the input.
-We read the encoder.
-The original audit used base; all five sizes are here.
-Chronos-Bolt-base~\citep{chronosbolt} is the same pattern on left-padded patches of 16.
-Chronos-2~\citep{ansari2025chronos2} is an encoder over the same patches; each step carries a mask and a time index in units of one over the maximum context length.
-In \texttt{chronos-forecasting}~2.3.2, a NaN left on the grid keeps its slot in all three: Chronos-T5 masks it as a padding token, and Bolt and Chronos-2 mark it in the mask channel, with Chronos-2's index still counting it.
-Our inputs contain no NaNs, so Chronos-2's index counts only kept steps.
-Time-MoE-50M~\citep{shi2025timemoe} is a causal decoder with one token per step and rotary embeddings.
-It has no NaN handling.
-Every model receives the dropped sequence: kept values in order, no timestamps, and no NaNs left on the grid.
+\textbf{Models.}
+We probe frozen public weights at every layer, including the input embedding.
+Chronos-T5 (tiny through large; \citealp{ansari2024chronos}) is a T5 encoder-decoder~\citep{raffel2020t5} with one quantized token per step and relative attention biases, so its input embedding carries no absolute position; we read the encoder and report all five sizes, where the original audit used only base.
+Chronos-Bolt-base~\citep{chronosbolt} follows the same design over left-padded patches of 16 steps, and Chronos-2~\citep{ansari2025chronos2} is an encoder over the same patches in which each step carries a mask and a time index measured in units of the maximum context length.
+Time-MoE-50M~\citep{shi2025timemoe} is a causal decoder with one token per step, rotary embeddings, and no NaN handling.
+Every model receives only the kept values, in order.
 
-Data are the first training series of each UCR 2018 dataset~\citep{dau2019ucr}, truncated at 512, keeping the 102 series of length at least 128 with non-zero variance, then $z$-scored.
-The rule was fixed before any run.
+\textbf{Data and missingness.}
+We take the first training series of each UCR 2018 dataset~\citep{dau2019ucr}, truncate it to 512 steps, keep the 102 series that are at least 128 steps long with non-zero variance, and $z$-score them; this rule was fixed before any model was run.
+The first and last steps are always kept.
+Random dropout keeps $n = \mathrm{round}((1-p)T)$ steps chosen completely at random~\citep{little2019missing}.
+Block outages alternate observed and missing runs of geometric length with a mean outage of 10 steps, so the missing rate is $p$ in expectation and the number of kept steps varies by draw; a draw that keeps fewer than eight points is replaced by a random-dropout draw.
+Value-dependent missingness, added after the analysis plan, chooses a fixed number of interior steps to drop, sampled without replacement with weight proportional to $\exp(1.5 z_t)$.
+The Beta keep of the original audit truncates $\mathrm{Beta}(0.35,4)\cdot(T-1)$ toward zero and keeps the first $n-2$ distinct interior times, so that at $p = 0.5$ about 83\% of its gaps are a single step.
+Each series is also paired with standard normal noise at the same kept steps.
+Section~\ref{sec:trap} uses four drop rates and one draw; Section~\ref{sec:ladder} uses $p \in \{0.5, 0.7\}$ and three draws, averaged per series before taking the median.
 
-Endpoints are always kept.
-Random dropout keeps $n = \mathrm{round}((1-p)T)$ steps, missing completely at random~\citep{little2019missing}.
-Block outages alternate geometric runs with a mean outage of 10 steps; the expected rate is $p$, and the count varies by draw.
-A draw with fewer than eight kept points is replaced by the random-dropout keep.
-Value-dependent missingness, added after the plan, samples a fixed number of interior steps without replacement with weight proportional to $\exp(1.5 z_t)$.
-The Beta keep from the original audit truncates $\mathrm{Beta}(0.35,4)\cdot(T-1)$ toward zero and keeps the first $n-2$ distinct interior times.
-At $p = 0.5$, about 83\% of its gaps are one step.
-Each series also gets standard normal noise at the same kept steps.
-Section~\ref{sec:trap} uses four drop rates and one draw.
-Section~\ref{sec:ladder} uses $p \in \{0.5, 0.7\}$ and three draws, averaged before the median.
-
-Targets are token position $k$; elapsed time $\mperp$, the normalized time with its linear trend in $k$ removed; and the gap $\dt$.
-For patch models these are the patch index, the time of the patch's last observation, and the time since the previous patch ended, with the first patch measured from $t = 0$.
-Our main sweep instead averaged the step-level targets inside each patch.
-Bolt's result on that older target is not comparable to Table~\ref{tab:main}.
-
-Held-out probes fit ridge ($\lambda = 1$) per target on states standardized in the training fold.
-We report the median Pearson $r$ over series.
-Shuffled and contiguous folds use the original protocol: ridge on the raw states, then the mean of the fold correlations.
-Contiguous folds test a block at a time; interior blocks sit between training tokens.
-Held-out series, five folds grouped by series, are primary.
-An MLP with two layers of 256 units and one joint head on position, gap, and elapsed time uses the same folds, with early stopping on 15\% of the training series.
-It is exploratory, and it was also run on the white-noise inputs.
-
-References are not ceilings.
-A position-only oracle is the Monte Carlo expectation of the target given position.
-A difference probe uses the same split on local input features: a five-point window and its differences for encoders, past values only for Time-MoE, and within-patch summaries for patch models.
-A running sum accumulates that probe's gap estimates and is residualized on position, as $\mperp$ is.
-The difference probe, the running sum, the MLP, the extra draws, and value-dependent missingness were added after the plan.
-Table~\ref{tab:main} chooses its layer on 30\% of series and scores the other 71.
-Section~\ref{sec:trap} and the replication use the final layer.
-The Beta-keep patch numbers use the best layer and the older per-patch averages.
-The pipeline reproduces the original eight-series numbers (Appendix~\ref{app:replication}).
-
-\section{Elapsed time from white noise}
-\label{sec:trap}
+\textbf{Targets and probes.}
+We probe three targets: token position $k$; elapsed time $\mperp$, the normalized observation time with its linear trend in $k$ removed; and the gap $\dt$ between consecutive kept steps.
+For patch models these become the patch index, the time of the patch's last observation, and the time elapsed since the previous patch ended, with the first patch measured from $t = 0$; our main sweep instead averaged the step-level targets within each patch, so Bolt's result on that older target is not comparable to Table~\ref{tab:main}.
+Our primary probes fit a ridge regression ($\lambda = 1$) per target on held-out series, using five folds grouped by series and states standardized within the training fold, and we report the median Pearson $r$ over series.
+Shuffled and contiguous folds within a series follow the original protocol, fitting ridge on the raw states and averaging the fold correlations; contiguous folds hold out one block at a time, although interior blocks still sit between training tokens.
+As an exploratory check we also fit an MLP with two hidden layers of 256 units and one joint head for position, gap, and elapsed time, using the same folds with early stopping on 15\% of the training series, and we run it on the white-noise inputs as well.
 
 \begin{figure}[ht]
   \centering
   \includegraphics[width=\linewidth]{figures/fig1_trap.pdf}
-  \caption{Final-layer $r$ for $\mperp$ at $p = 0.5$.
-  Filled marks are white noise and open marks are real data; triangles are Time-MoE and circles are Chronos-T5.
-  The dashed line is the position-only oracle.
-  Under the Beta keep, held-out Chronos-T5 noise matches that oracle.
-  Under random dropout and block outages the oracle is about 0, and shuffled folds still read $r = 0.63$--$0.71$ from noise.}
+  \caption{Final-layer $r$ for $\mperp$ at $p = 0.5$ for Chronos-T5 (circles) and Time-MoE (triangles), from white noise (filled) and real data (open); the dashed line is the position-only oracle.
+  Under random dropout and block outages, where the oracle is about 0, shuffled folds still read $r = 0.63$--$0.71$ from noise.}
   \label{fig:trap}
 \end{figure}
 
-Under the Beta keep, $\mperp$ is still a smooth function of rank.
-Held-out Chronos-T5 probes read it from white noise at $r = 0.92$--$0.97$, against an oracle of 0.92 (final layer).
-Chronos-Bolt and Chronos-2 reach 0.96--0.97 against a patch oracle of 0.997 (main sweep, per-patch averages, best layer).
-Time-MoE reaches 0.27: a causal token cannot see how many tokens follow, and the Beta curve depends on rank in the whole window.
+\textbf{References.}
+These references are not ceilings: the position-only oracle is the Monte Carlo expectation of the target given position.
+The difference probe applies the same held-out split to local input features: a five-point window and its differences for the encoders, past values only for Time-MoE, and within-patch summaries for the patch models.
+The running sum accumulates the difference probe's gap estimates and is then residualized on position in the same way as $\mperp$.
+The difference probe, the running sum, the MLP, and the additional draws were also added after the analysis plan.
+Table~\ref{tab:main} selects its layer on 30\% of the series and reports results on the remaining 71, while Section~\ref{sec:trap} and the replication of the original eight-series numbers (Appendix~\ref{app:replication}) use the final layer.
 
-Under random dropout and block outages the oracle is about 0, and held-out probes recover none of it from noise ($r \le 0.07$).
-Shuffled folds, run for the six one-token models, still report $r = 0.63$--$0.71$ from white noise at $p = 0.5$, and $0.70$--$0.91$ on real data.
-Contiguous folds fall to $0.03$--$0.12$~\citep{bergmeir2012cv,roberts2017cv}.
-Shuffled folds measure smoothness; held-out series leave the position geometry, which white noise and the oracle show.
+\section{Elapsed time from white noise}
+\label{sec:trap}
+
+
+Under the Beta keep, $\mperp$ remains a smooth function of rank.
+Held-out probes on Chronos-T5 read it from white noise at $r = 0.92$--$0.97$, against a position-only oracle of 0.92 (final layer), and Chronos-Bolt and Chronos-2 reach 0.96--0.97 against a patch-level oracle of 0.997 (main sweep, per-patch averages, best layer).
+Time-MoE is the exception (0.27): in a causal decoder a token cannot see how many tokens follow it, while the Beta curve depends on rank within the whole window.
+
+Under random dropout and block outages the oracle is close to 0, and held-out probes recover essentially nothing from noise ($r \le 0.07$).
+Shuffled folds, which we ran for the six one-token models, nevertheless report $r = 0.63$--$0.71$ from white noise at $p = 0.5$ and $0.70$--$0.91$ on real data, while contiguous folds fall to $0.03$--$0.12$~\citep{bergmeir2012cv,roberts2017cv}.
+Shuffled folds therefore measure smoothness along the series; held-out series remove that interpolation, and the white-noise input and the oracle expose the remaining position geometry.
 
 \section{What the corrected probes recover}
 \label{sec:ladder}
@@ -153,19 +119,18 @@ Shuffled folds measure smoothness; held-out series leave the position geometry, 
 \begin{figure}[ht]
   \centering
   \includegraphics[width=\linewidth]{figures/fig2_v2.pdf}
-  \caption{Held-out ridge probes, three draws.
-  (a)~Token position from white noise under random dropout at $p = 0.5$; open marks are the input layer.
-  (b)~Gap $\dt$ on real data at the same rate; grey ticks are the difference probe.
-  (c)~Elapsed time under value-dependent missingness at $p = 0.7$; grey ticks are the running sum.}
+  \caption{Held-out ridge probes averaged over three draws.
+  (a)~Token position from white noise under random dropout at $p = 0.5$; open marks show the input layer.
+  (b)~Gap $\dt$ on real data at the same rate, with grey ticks marking the difference probe.
+  (c)~Elapsed time under value-dependent missingness at $p = 0.7$, with grey ticks marking the running sum.}
   \label{fig:ladder}
 \end{figure}
 
 \begin{table}[ht]
-  \caption{Held-out ridge probes; the layer is chosen on 30\% of series.
-  Position is $r(k)$ from noise.
-  Gap is real-minus-noise $\Delta r$ for $\dt$ at random dropout $p = 0.5$, with a 95\% interval.
-  The remaining columns subtract the difference probe, then the running sum for $\mperp$ at $p = 0.7$.
-  A star marks an interval that excludes 0. MLP pairs are in Appendix~\ref{app:pairs}.}
+  \caption{Held-out ridge probes, with the layer chosen on 30\% of series.
+  Position is $r(k)$ from white noise; Gap is the real-minus-noise $\Delta r$ for $\dt$ under random dropout at $p = 0.5$, with a 95\% interval.
+  The last three columns give the model minus the difference probe and the model minus the running sum for $\mperp$ at $p = 0.7$.
+  A star marks an interval that excludes 0; MLP pairs are in Appendix~\ref{app:pairs}.}
   \label{tab:main}
   \centering
   \small
@@ -186,60 +151,40 @@ Shuffled folds measure smoothness; held-out series leave the position geometry, 
   \end{tabular}
 \end{table}
 
-Every model decodes position from white noise at $r = 0.94$--$0.996$.
-For Chronos-T5 and Time-MoE the input embedding carries none; position appears in the first layers.
-Chronos-2's input embedding already reaches about 0.96, from the time index on the shortened series.
+Every model decodes token position from white noise at $r = 0.94$--$0.996$, and across Chronos-T5 sizes from 8M to 710M parameters this rises from 0.974 to 0.996.
+For Chronos-T5 and Time-MoE the input embedding carries no position and it appears within the first few layers, whereas Chronos-2's input embedding already reaches about 0.96 through its time index on the shortened series.
 
-The analysis plan, written before the runs and released with the code, set the gap test as decoding under random dropout at $p = 0.5$: median real-minus-noise $\Delta r > 0.10$ and an interval excluding 0.
+The analysis plan, written before the runs and released with the code, defined the gap test as decoding $\dt$ under random dropout at $p = 0.5$, with a median real-minus-noise $\Delta r$ above 0.10 and an interval that excludes 0.
 On the planned draw, seven models passed and Chronos-2 did not.
-Over three draws the six one-token models still pass.
-Chronos-2's interval is then 0.13 [0.02, 0.16], and it now passes.
-Chronos-Bolt passed that draw under the old per-patch averages; under the last-observation target in Table~\ref{tab:main}, three draws give 0.05 [$-0.06$, 0.08].
+Averaged over three draws, the six one-token models still pass (gap $\Delta r$ rises from 0.25 at Chronos-T5 tiny to 0.40 at mini and then flattens) and Chronos-2 now passes as well, at 0.13 [0.02, 0.16]; Chronos-Bolt, which passed the planned draw under the old per-patch averages, gives 0.05 [$-0.06$, 0.08] under the last-observation target in Table~\ref{tab:main}.
 
-A difference probe on local input changes reaches $r = 0.42$ here (0.36 past-only).
-Mini and Time-MoE match it, tiny falls short by 0.12, and Chronos-T5 small through large sit 0.03--0.06 above it, inside the draw-to-draw movement of the medians (about $\pm 0.05$).
-Across series the gap tracks lag-1 autocorrelation (Spearman $\rho = 0.52$--$0.70$ for one-token models): a jump implies elapsed time when the series is smooth.
+The gap signal is largely what the input already shows: a difference probe on local value changes reaches $r = 0.42$ in the same condition (0.36 with past values only); Chronos-T5 mini and Time-MoE match it, tiny falls short by 0.12, and Chronos-T5 small through large sit 0.03--0.06 above it, within the draw-to-draw movement of the medians (about $\pm 0.05$).
+Across series, the gap result also tracks lag-1 autocorrelation (Spearman $\rho = 0.52$--$0.70$ for the one-token models): a jump between values signals elapsed time only when the series is smooth.
 
-Under random dropout at $p = 0.7$, elapsed-time correlations are about 0.10--0.23 and the running sum is about 0.13--0.25.
-Five of eight ridge intervals exclude zero and are negative; Chronos-2's ridge difference is $+0.06$, and its interval includes zero.
-The MLP differences mostly include zero.
+Under random dropout at $p = 0.7$, elapsed time is barely decodable: model correlations are about 0.10--0.23 and the running sum reaches about 0.13--0.25.
+Five of eight ridge intervals exclude zero and are negative, Chronos-2's ridge difference is $+0.06$ with an interval that includes zero, and most MLP intervals include zero.
 Under block outages, ridge correlations are about 0.14--0.27 and every model in Table~\ref{tab:main} falls below the running sum.
-Under value-dependent missingness, ridge correlations are $0.44$--$0.63$ and the running sum is about 0.80.
+Under value-dependent missingness, where large jumps in value mark large gaps, ridge correlations rise to $0.44$--$0.63$, but the running sum reaches about 0.80.
 The same deficit holds at $p = 0.5$ for all 32 model--probe pairs, with intervals excluding zero (Appendix~\ref{app:pairs}).
-The running sum has an explicit accumulator.
-The probe has to find accumulated time in one token's state.
-The deficit means these probes do not read it out in that form.
-On the noise inputs, the same MLP decodes essentially no elapsed time for the one-token models ($|r| \le 0.071$ across conditions).
+The comparison is not symmetric, since the running sum has an explicit accumulator while the probe must find accumulated time in one token's state; the deficit shows that these probes do not read it out in that form.
+On white noise, the MLP decodes essentially no elapsed time for the one-token models ($|r| \le 0.071$ in every condition).
 
-From 8M to 710M, position decoding moves from 0.974 to 0.996, and gap $\Delta r$ from 0.25 at tiny to 0.40 at mini before flattening.
-Patch medians drop series with fewer than eight patches (about 22\% of cells).
-
-\section{Recommendations}
+\section{Recommendations and limitations}
 \label{sec:recs}
-
-(1)~Run the probe on white noise at the same kept steps.
-(2)~Evaluate on held-out series.
-(3)~Report the position-only oracle; a model that matches it is reading position.
-(4)~Probe gaps and elapsed time separately.
-(5)~Compare with a no-model baseline built from the features you claim the model uses.
-A baseline that sums the gaps tests whether the states expose that sum.
-
-\section{Limitations}
 \label{sec:limits}
 
-Value-dependent missingness is one missing-not-at-random mechanism.
-UCR series are short and univariate.
-We measure representations, not forecasts.
-Quantizing the difference probe's inputs, as Chronos-T5 does, changes model-minus-probe gap correlations by at most 0.015.
-We do not run the NaN-on-grid input that the three Chronos models accept.
+When probing elapsed time in a sequence model with missing observations, we recommend (1)~running the probe on white noise at the same kept steps; (2)~evaluating on held-out series; (3)~reporting the position-only oracle, since a model that matches it is reading position; (4)~probing gaps and elapsed time separately; and (5)~comparing against a no-model baseline built from the features the model is claimed to use, where a baseline that sums the gaps tests whether the states expose that sum.
+
+Value-dependent missingness is only one missing-not-at-random mechanism, and UCR series are short and univariate.
+We measure representations rather than forecasts.
+Quantizing the difference probe's inputs as Chronos-T5 does changes the model-minus-probe gap correlations by at most 0.015.
+We also do not evaluate the NaN-on-grid input that the three Chronos models accept.
 
 \section{Conclusion}
 \label{sec:conc}
 
-Held-out series, matched-keep noise, and a position-only oracle expose both the position curve and shuffled-fold interpolation.
-Position is available from noise, and one-token gap decoding sits near a no-model probe on local value changes.
-Where the values reveal the gaps, elapsed time is readable and a running sum of that probe reads more.
-Leaving the missing steps on the grid gives Chronos-T5, Chronos-Bolt, and Chronos-2 the spacing as input; whether they use it is untested.
+With held-out series, matched-keep white noise, and a position-only oracle as controls, every model we tested encodes token position from noise and decodes gaps about as well as a no-model probe on local value changes, and where the values reveal the gaps, that probe's running sum recovers more elapsed time than the states do.
+Whether the Chronos models use the spacing when missing steps stay on the grid is untested.
 Code and per-series results: \url{https://github.com/AIpsychonaut/neurips-fmts-2026}.
 
 \begin{ack}
@@ -257,31 +202,27 @@ The author declares no competing interests.
 \section{Protocol}
 \label{app:protocol}
 
-Chronos-T5 states are encoder hidden states after the model's tokenizer, with the EOS position dropped.
-Chronos-Bolt states are encoder states on left-padded patches; a register token is appended and then dropped before probing.
-Chronos-2's \texttt{encode}, in \texttt{chronos-forecasting}~2.3.2, embeds the context patches and one future query patch, joins them, and runs the encoder once.
-Hooks keep the context rows.
+Chronos-T5 states are the encoder hidden states after the model's own tokenizer, with the EOS position dropped.
+Chronos-Bolt states are the encoder states on left-padded patches; the register token appended by the model is dropped before probing.
+Chronos-2's \texttt{encode} in \texttt{chronos-forecasting}~2.3.2 embeds the context patches and one future query patch, joins them, and runs the encoder once; our hooks keep the context rows.
 Time-MoE states are the inner decoder's hidden states on values $z$-scored per series.
-Seeds are $42 + 1000s + 100\ell + \mathrm{round}(10p)$, plus $10^{7}$ times the draw.
-Noise adds $7777777$.
-The oracle uses 200 Monte Carlo draws and 50 rank bins.
+In \texttt{chronos-forecasting}~2.3.2, a NaN left on the grid keeps its slot in all three Chronos models: Chronos-T5 masks it as a padding token, while Bolt and Chronos-2 mark it in the mask channel, and Chronos-2's time index still counts it.
+Seeds are $42 + 1000s + 100\ell + \mathrm{round}(10p)$ plus $10^{7}$ times the draw index, and the noise input adds $7777777$.
+The oracle uses 200 Monte Carlo draws and 50 rank bins, and patch-model medians omit series with fewer than eight patches (about 22\% of cells).
 Compute was about 5 GPU-hours in total on NVIDIA A10G GPUs, one per model.
 
 \section{Replication}
 \label{app:replication}
 
-On the original eight series, truncated at 400, Beta keep, $p = 0.5$, Chronos-T5-base, final layer, and shuffled folds: median $r(\mperp) = 0.821$ on real data in both bf16 and fp32.
-Noise is 0.760 in bf16 (0.7597 before rounding) and 0.759 in fp32.
-The submitted report was 0.821 and 0.759.
+On the original eight series, truncated at 400, with the Beta keep at $p = 0.5$, Chronos-T5-base, the final layer, and shuffled folds, the pipeline gives a median $r(\mperp)$ of 0.821 on real data in both bf16 and fp32.
+On noise it gives 0.760 in bf16 (0.7597 before rounding) and 0.759 in fp32, against 0.821 and 0.759 in the submitted version.
 
 \section{Further pairs}
 \label{app:pairs}
 
-Model minus running sum for $\mperp$ at $p = 0.7$, ridge / MLP.
-Every interval excludes 0.
-At $p = 0.5$, all 32 model--probe pairs fall below the running sum with intervals excluding 0.
-These intervals are series bootstraps for one comparison at a time.
-They are not adjusted for the number of models and conditions.
+Table~\ref{tab:appc} reports the model minus the running sum for $\mperp$ at $p = 0.7$ under ridge and MLP probes; every interval excludes 0.
+At $p = 0.5$, all 32 model--probe pairs also fall below the running sum with intervals excluding 0.
+These intervals are series bootstraps for one comparison at a time and are not adjusted for the number of models and conditions.
 Full grids are released with the code.
 
 \begin{table}[h]
