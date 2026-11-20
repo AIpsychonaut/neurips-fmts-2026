@@ -15,6 +15,8 @@
 \usepackage{microtype}
 \usepackage{xcolor}
 \usepackage{graphicx}
+\renewcommand{\ttdefault}{lmtt}
+\hypersetup{pdftitle={Position and Elapsed Time in Sparse-Time Probes of Time Series Foundation Models},pdfauthor={Akanksha Gupta}}
 
 \newcommand{\mperp}{m^{\perp}}
 \newcommand{\dt}{\Delta t}
@@ -94,7 +96,7 @@ As an exploratory check we also fit an MLP with two hidden layers of 256 units a
   \label{fig:trap}
 \end{figure}
 
-\textbf{References.}
+\textbf{Reference baselines.}
 These references are not ceilings: the position-only oracle is the Monte Carlo expectation of the target given position.
 The difference probe applies the same held-out split to local input features: a five-point window and its differences for the encoders, past values only for Time-MoE, and within-patch summaries for the patch models.
 The running sum accumulates the difference probe's gap estimates and is then residualized on position in the same way as $\mperp$.
@@ -129,7 +131,7 @@ Shuffled folds therefore measure smoothness along the series; held-out series re
 \begin{table}[ht]
   \caption{Held-out ridge probes, with the layer chosen on 30\% of series.
   Position is $r(k)$ from white noise; Gap is the real-minus-noise $\Delta r$ for $\dt$ under random dropout at $p = 0.5$, with a 95\% interval.
-  The last three columns give the model minus the difference probe and the model minus the running sum for $\mperp$ at $p = 0.7$.
+  The last three columns give the model minus the difference probe for $\dt$ in the same condition, and the model minus the running sum for $\mperp$ at $p = 0.7$.
   A star marks an interval that excludes 0; MLP pairs are in Appendix~\ref{app:pairs}.}
   \label{tab:main}
   \centering
@@ -158,8 +160,8 @@ The analysis plan, written before the runs and released with the code, defined t
 On the planned draw, seven models passed and Chronos-2 did not.
 Averaged over three draws, the six one-token models still pass (gap $\Delta r$ rises from 0.25 at Chronos-T5 tiny to 0.40 at mini and then flattens) and Chronos-2 now passes as well, at 0.13 [0.02, 0.16]; Chronos-Bolt, which passed the planned draw under the old per-patch averages, gives 0.05 [$-0.06$, 0.08] under the last-observation target in Table~\ref{tab:main}.
 
-The gap signal is largely what the input already shows: a difference probe on local value changes reaches $r = 0.42$ in the same condition (0.36 with past values only); Chronos-T5 mini and Time-MoE match it, tiny falls short by 0.12, and Chronos-T5 small through large sit 0.03--0.06 above it, within the draw-to-draw movement of the medians (about $\pm 0.05$).
-Across series, the gap result also tracks lag-1 autocorrelation (Spearman $\rho = 0.52$--$0.70$ for the one-token models): a jump between values signals elapsed time only when the series is smooth.
+The gap signal is largely what the input already shows: a difference probe on local value changes reaches $r = 0.42$ in the same condition (0.36 with past values only); Chronos-T5 mini and Time-MoE match it, tiny falls short by 0.12, and Chronos-T5 small through large sit 0.03--0.06 above it, comparable to the draw-to-draw movement of the medians (about $\pm 0.05$).
+Across series, the gap result also tracks lag-1 autocorrelation (Spearman $\rho = 0.52$--$0.70$ for the one-token models): a jump between values signals elapsed time mainly when the series is smooth.
 
 Under random dropout at $p = 0.7$, elapsed time is barely decodable: model correlations are about 0.10--0.23 and the running sum reaches about 0.13--0.25.
 Five of eight ridge intervals exclude zero and are negative, Chronos-2's ridge difference is $+0.06$ with an interval that includes zero, and most MLP intervals include zero.
@@ -183,7 +185,7 @@ We also do not evaluate the NaN-on-grid input that the three Chronos models acce
 \section{Conclusion}
 \label{sec:conc}
 
-With held-out series, matched-keep white noise, and a position-only oracle as controls, every model we tested encodes token position from noise and decodes gaps about as well as a no-model probe on local value changes, and where the values reveal the gaps, that probe's running sum recovers more elapsed time than the states do.
+With held-out series, matched-keep white noise, and a position-only oracle as controls, every model we tested encodes token position from noise, the one-token models decode gaps about as well as a no-model probe on local value changes, and where the values reveal the gaps, that probe's running sum recovers more elapsed time than the states do.
 Whether the Chronos models use the spacing when missing steps stay on the grid is untested.
 Code and per-series results: \url{https://github.com/AIpsychonaut/neurips-fmts-2026}.
 
