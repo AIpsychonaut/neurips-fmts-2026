@@ -115,7 +115,7 @@
 \item {\bf Experiments compute resources}
     \item[] Question: For each experiment, does the paper provide sufficient information on the computer resources (type of compute workers, memory, time of execution) needed to reproduce the experiments?
     \item[] Answer: \answerYes{}
-    \item[] Justification: Appendix~\ref{app:protocol}: about 5 GPU-hours on one NVIDIA A10G; probes on CPU.
+    \item[] Justification: Appendix~\ref{app:protocol}: about 5 GPU-hours in total on NVIDIA A10G GPUs, one per model; probes on CPU.
     \item[] Guidelines:
     \begin{itemize}
         \item The answer \answerNA{} means that the paper does not include experiments.
@@ -216,8 +216,8 @@
 \item {\bf Declaration of LLM usage}
     \item[] Question: Does the paper describe the usage of LLMs if it is an important, original, or non-standard component of the core methods in this research? Note that if the LLM is used only for writing, editing, or formatting purposes and does \emph{not} impact the core methodology, scientific rigor, or originality of the research, declaration is not required.
     %this research? 
-    \item[] Answer: \answerYes{}
-    \item[] Justification: An LLM assistant (Claude, Anthropic) wrote experiment and analysis code and drafted text under the author's direction; the author checked the claims, numbers and citations.
+    \item[] Answer: \answerNA{}
+    \item[] Justification: LLMs are not an important, original, or non-standard component of the core methods. An LLM assistant was used only for coding and writing support under the author's direction, and the author verified all claims, numbers and citations.
     \item[] Guidelines:
     \begin{itemize}
         \item The answer \answerNA{} means that the core method development in this research does not involve LLMs as any important, original, or non-standard components.

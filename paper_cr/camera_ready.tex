@@ -265,7 +265,7 @@ Time-MoE states are the inner decoder's hidden states on values $z$-scored per s
 Seeds are $42 + 1000s + 100\ell + \mathrm{round}(10p)$, plus $10^{7}$ times the draw.
 Noise adds $7777777$.
 The oracle uses 200 Monte Carlo draws and 50 rank bins.
-Compute was about 5 GPU-hours on one NVIDIA A10G.
+Compute was about 5 GPU-hours in total on NVIDIA A10G GPUs, one per model.
 
 \section{Replication}
 \label{app:replication}
