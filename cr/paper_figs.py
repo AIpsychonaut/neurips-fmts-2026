@@ -56,39 +56,52 @@ def fig_trap(d):
     laws = [("beta", "Beta keep"), ("iid", "Random dropout"), ("block", "Block outages")]
     schemes = [("within_shuffled", "Shuffled\nfolds"), ("within_blocked", "Contiguous\nfolds"), ("cross", "Held-out\nseries")]
     p = 0.5
-    fig, axes = plt.subplots(1, 3, figsize=(5.5, 1.5), sharey=True)
+    fig, axes = plt.subplots(1, 3, figsize=(5.5, 1.55), sharey=True)
     rng = np.random.default_rng(0)
     vals = {}
+    off = {"real": -0.17, "noise": 0.17}
     for ax, (law, title) in zip(axes, laws):
         oracle = S["references"][f"step|{law}|{p}|m_perp|mc_oracle"]
+        ax.axhline(oracle, color=INK2, lw=0.8, ls=(0, (3, 2)), zorder=1)
         for j, (cv, _) in enumerate(schemes):
-            rs = []
-            for m in STEP:
-                x = d[(d.model == m) & (d.law == law) & (d.p == p) & (d.input == "noise") & (d.target == "m_perp") & (d.cv == cv)]
-                last = x.n_layers.iloc[0]
-                r = med(x, layer=last)
-                rs.append(r)
-                vals[(law, cv, m)] = r
-                tm = m == "timemoe-50m"
-                ax.scatter(j + rng.uniform(-0.13, 0.13), r, s=16, zorder=3,
-                           facecolor="white" if tm else BLUE, edgecolor=ORANGE if tm else BLUE, linewidth=1.0)
-            ax.plot([j - 0.25, j + 0.25], [np.median(rs)] * 2, color=INK, lw=1.2, zorder=4, solid_capstyle="round")
-        ax.axhline(oracle, color=REF, lw=0.9, ls=(0, (3, 2)), zorder=1)
-        ax.text(-0.45, oracle + 0.025, "position-only oracle" if law == "beta" else "oracle", color=INK2,
-                fontsize=6.2, ha="left", va="bottom")
+            ax.axvspan(j - 0.42, j + 0.42, color="#f6f5f2", zorder=0, lw=0)
+            for inp in ("real", "noise"):
+                rs = []
+                for m in STEP:
+                    x = d[(d.model == m) & (d.law == law) & (d.p == p) & (d.input == inp) & (d.target == "m_perp") & (d.cv == cv)]
+                    r = med(x, layer=x.n_layers.iloc[0])
+                    rs.append(r)
+                    if inp == "noise":
+                        vals[(law, cv, m)] = r
+                    tm = m == "timemoe-50m"
+                    col = BLUE if inp == "noise" else REF
+                    ax.scatter(j + off[inp] + rng.uniform(-0.06, 0.06), r, s=13 if tm else 11, zorder=3,
+                               marker="^" if tm else "o", facecolor=col if inp == "noise" else "white",
+                               edgecolor=col, linewidth=0.8)
+                ax.plot([j + off[inp] - 0.11, j + off[inp] + 0.11], [np.median(rs)] * 2,
+                        color=INK, lw=1.1, zorder=4, solid_capstyle="butt")
         ax.set_xticks(range(3), [s for _, s in schemes])
         ax.set_xlim(-0.5, 2.5)
-        ax.set_title(title, color=INK)
+        ax.set_title(title, color=INK, pad=3)
         ax.yaxis.grid(True, color=GRID, lw=0.5)
         ax.set_axisbelow(True)
         ax.tick_params(axis="x", length=0)
-    axes[0].set_ylim(-0.15, 1.05)
-    axes[0].set_ylabel("$r$ for elapsed time\nfrom white noise")
-    h1 = axes[0].scatter([], [], s=16, color=BLUE, label="Chronos-T5 (5 sizes)")
-    h2 = axes[0].scatter([], [], s=16, facecolor="white", edgecolor=ORANGE, linewidth=1.0, label="Time-MoE")
-    h3 = axes[0].plot([], [], color=INK, lw=1.2, label="median")[0]
-    fig.tight_layout(pad=0.3, w_pad=0.8, rect=(0, 0, 1, 0.86))
-    fig.legend(handles=[h1, h2, h3], loc="upper center", ncol=3, frameon=False, bbox_to_anchor=(0.55, 1.0))
+    # annotate the two failure modes where they occur
+    axes[0].annotate("noise matches\nthe oracle", xy=(2.05, 0.93), xytext=(1.0, 0.62), fontsize=6, color=INK2,
+                     ha="center", arrowprops=dict(arrowstyle="-", color=INK2, lw=0.5))
+    axes[1].annotate("interpolation:\nhigh $r$ from noise", xy=(0.2, 0.68), xytext=(1.55, 0.5), fontsize=6, color=INK2,
+                     ha="center", arrowprops=dict(arrowstyle="-", color=INK2, lw=0.5))
+    axes[0].set_ylim(-0.15, 1.08)
+    axes[0].set_yticks([0, 0.5, 1])
+    axes[0].set_ylabel("$r$ for elapsed time $m^{\\perp}$")
+    hs = [axes[0].scatter([], [], s=11, color=BLUE, label="white-noise input"),
+          axes[0].scatter([], [], s=11, facecolor="white", edgecolor=REF, lw=0.8, label="real input"),
+          axes[0].scatter([], [], s=13, marker="^", facecolor="white", edgecolor=INK2, lw=0.8, label="Time-MoE (others: Chronos-T5)"),
+          axes[0].plot([], [], color=INK, lw=1.1, label="median")[0],
+          axes[0].plot([], [], color=INK2, lw=0.8, ls=(0, (3, 2)), label="position-only oracle")[0]]
+    fig.tight_layout(pad=0.3, w_pad=0.8, rect=(0, 0, 1, 0.85))
+    fig.legend(handles=hs, loc="upper center", ncol=5, frameon=False, bbox_to_anchor=(0.53, 1.0),
+               handletextpad=0.3, columnspacing=1.1, fontsize=6.4)
     for ext in ("pdf", "png"):
         fig.savefig(OUT / f"fig1_trap.{ext}", bbox_inches="tight")
     plt.close(fig)

@@ -131,9 +131,9 @@ The pipeline reproduces the original eight-series numbers (Appendix~\ref{app:rep
 \begin{figure}[t]
   \centering
   \includegraphics[width=\linewidth]{figures/fig1_trap.pdf}
-  \caption{Final-layer $r$ for $\mperp$ from white noise at $p = 0.5$, Chronos-T5 and Time-MoE.
-  The dashed line is the position-only oracle.
-  Under random dropout and block outages the oracle is about 0, yet shuffled folds report $r \approx 0.65$.}
+  \caption{Final-layer $r$ for $\mperp$ at $p = 0.5$, Chronos-T5 and Time-MoE, from white noise (filled) and real data (open).
+  Real and noise inputs score alike under every scheme.
+  Under random dropout and block outages the position-only oracle (dashed) is about 0, yet shuffled folds report $r \approx 0.65$ from noise.}
   \label{fig:trap}
 \end{figure}
 
@@ -219,7 +219,7 @@ Patch medians drop series with fewer than eight patches (about 22\% of cells).
 
 \begin{enumerate}[leftmargin=1.15em,itemsep=1pt,topsep=2pt,parsep=0pt]
   \item Run the probe on white noise at the same kept steps.
-  \item Evaluate on held-out series. Shuffled folds measure smoothness.
+  \item Evaluate on held-out series.
   \item Report the position-only oracle. A model that matches it is reading position.
   \item Probe gaps and elapsed time separately.
   \item Compare with a no-model baseline built from the features you claim the model uses. A baseline that sums the gaps tests whether the states expose that sum.
@@ -237,7 +237,7 @@ We do not run the NaN-on-grid input that the three Chronos models accept.
 \section{Conclusion}
 \label{sec:conc}
 
-Held-out series, matched-keep noise, and a position-only oracle separate a position curve under the Beta keep from shuffled-fold interpolation, including on white noise.
+Held-out series, matched-keep noise, and a position-only oracle expose both the position curve and shuffled-fold interpolation.
 Position is available from noise, and one-token gap decoding sits near a no-model probe on local value changes.
 Where the values reveal the gaps, elapsed time is readable and a running sum of that probe reads more.
 Leaving the missing steps on the grid gives Chronos-T5, Chronos-Bolt, and Chronos-2 the spacing as input; whether they use it is untested.
