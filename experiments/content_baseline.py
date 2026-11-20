@@ -5,9 +5,9 @@ Same keeps, series, targets and cross-series probe as the model runs, but the
   - step / bidirectional: y_{k-2..k+2}, first differences around k, |.| and squares
   - step / causal:        y_{k-3..k}, backward differences, |.| and squares (fair to a causal decoder)
   - patch:                per-patch summary of within-patch values and differences
-Output: cr/results/content_baseline.csv
+Output: experiments/results/content_baseline.csv
 
-python cr/content_baseline.py
+python experiments/content_baseline.py
 """
 from __future__ import annotations
 

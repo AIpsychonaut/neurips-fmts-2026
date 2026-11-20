@@ -4,10 +4,10 @@ For every (law, p, draw): difference probes on input values (ridge and MLP), the
 learned position-only reference (spline of rank). Families:
   step_bidir (raw values), step_bidir_quant (Chronos-T5 quantized values), step_causal (raw, past-only),
   patch (patch summaries, v2 patch targets).
-Output: cr/results_v2/references_v2.csv with columns
+Output: experiments/results_v2/references_v2.csv with columns
   law,p,draw,family,probe,quantity,series,r   quantity in {k,m_perp,dt,running_sum,position_m_perp,position_dt}
 
-  modal run cr/v2_refs.py
+  modal run experiments/v2_refs.py
 """
 from __future__ import annotations
 

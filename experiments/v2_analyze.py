@@ -1,4 +1,4 @@
-"""Analysis of the v2 robustness batch. Reads cr/results_v2/, writes cr/results_v2/summary_v2.json and prints tables.
+"""Analysis of the v2 robustness batch. Reads experiments/results_v2/, writes experiments/results_v2/summary_v2.json and prints tables.
 
 Layer choice: for each (model, law, p, probe, target), the layer with the best real-input median r on the
 fixed 30% development series (same seed-2026 split as analyze.py); everything is reported on the other 71.

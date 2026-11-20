@@ -1,11 +1,11 @@
 """Robustness batch (v2) on Modal. See V2_PLAN.md.
 
-  modal run cr/modal_v2.py --mode smoke                 # 6 series, iid p=0.7 draw 0, every model
-  modal run cr/modal_v2.py --mode full [--models a,b]   # iid/block/mnar x p 0.5/0.7 x 3 draws
+  modal run experiments/modal_v2.py --mode smoke                 # 6 series, iid p=0.7 draw 0, every model
+  modal run experiments/modal_v2.py --mode full [--models a,b]   # iid/block/mnar x p 0.5/0.7 x 3 draws
 
 Per model: ridge (all layers) + MLP (selected layers) held-out-series probes, real and noise inputs.
 Hidden states of the MLP layers are cached to the volume (float16) for later CPU-only probes.
-Results: cr/results_v2/<model>.csv ; quantized Chronos values: cr/results_v2/quantized.npz
+Results: experiments/results_v2/<model>.csv ; quantized Chronos values: experiments/results_v2/quantized.npz
 """
 from __future__ import annotations
 
@@ -33,7 +33,7 @@ app = modal.App("fmts-cr-v2")
 vol = modal.Volume.from_name("fmts-cr-vol", create_if_missing=True)
 GPU_KW = dict(gpu="A10G", timeout=60 * 60 * 6, memory=32768, cpu=8.0, volumes={"/vol": vol})
 
-# pre-registered gap layer per model (cr/eda/summary.json, P3_keeping_time)
+# pre-registered gap layer per model (experiments/eda/summary.json, P3_keeping_time)
 P3_LAYER = {"t5-tiny": 4, "t5-mini": 4, "t5-small": 5, "t5-base": 12, "t5-large": 23,
             "bolt-base": 9, "chronos-2": 2, "timemoe-50m": 7}
 

@@ -1,9 +1,10 @@
-# Camera-ready experiments: results and EDA
+# Main sweep: working notes
 
-**Run:** 5 Nov 2026, Modal A10G. **Status:** complete for all 8 models. No paper text has been written from this yet; this file is for discussion.
-**Pre-registration:** [PREREGISTRATION.md](PREREGISTRATION.md) (written before any result; addendum A1 also written before any result).
-**Raw data:** `cr/results/*.csv` (one row per model × drop pattern × drop rate × input × layer × target × CV × series). **Summary numbers:** `cr/eda/summary.json`. **Figures:** `cr/eda/figs/`.
-**Code:** [modal_run.py](modal_run.py), [core.py](core.py), [analyze.py](analyze.py), [content_baseline.py](content_baseline.py), [integrator_baseline.py](integrator_baseline.py).
+> Working notes written during the analysis, kept for transparency. They use the paper's working title and vocabulary ("counting", "perceiving", "keeping time"). Where they differ from the paper, the paper is authoritative. In particular, the running-sum comparisons under random dropout here use a single missingness draw; the three-draw results in [robustness_sweep.md](robustness_sweep.md) revise them.
+
+**Run:** 5 Nov 2026, Modal A10G, all 8 models. **Analysis plan:** [../ANALYSIS_PLAN.md](../ANALYSIS_PLAN.md), written before any result.
+**Raw data:** `experiments/results/*.csv.gz`. **Summary numbers:** `experiments/eda/summary.json`. **Figures:** `experiments/eda/figs/`.
+**Code:** `experiments/modal_run.py`, `core.py`, `analyze.py`, `content_baseline.py`, `integrator_baseline.py`.
 
 ---
 
@@ -57,7 +58,7 @@ Best-layer cross-series r for token position, iid drops, p = 0.5:
 | timemoe-50m | 0.951 | 0.929 | 0.00 |
 
 What stands out:
-- **The count is built, not given (T5, Time-MoE).** The input embedding has no position (r ≈ 0); one or two layers later it's 0.65–0.85; by mid-stack it's ≥ 0.95 ([figs/layers_iid.png](eda/figs/layers_iid.png)). Chronos-T5's encoder is bidirectional with only *relative* position biases. NLP work predicted such encoders would struggle to learn absolute position without position embeddings (Haviv et al. 2022). Chronos learns it anyway.
+- **The count is built, not given (T5, Time-MoE).** The input embedding has no position (r ≈ 0); one or two layers later it's 0.65–0.85; by mid-stack it's ≥ 0.95 ([figs/layers_iid.png](../../experiments/eda/figs/layers_iid.png)). Chronos-T5's encoder is bidirectional with only *relative* position biases. NLP work predicted such encoders would struggle to learn absolute position without position embeddings (Haviv et al. 2022). Chronos learns it anyway.
 - **Chronos-2 is handed the count** (input-layer r = 0.96), matching its design (a "time index" that is a step counter).
 - **Bolt's input layer is at 0.19.** Plausibly the left-padded first patch and the mask channel leak position; minor.
 - **Real data slightly *lowers* counting** (by 0.01–0.05), consistently. Content competes with position in the representation.
@@ -68,14 +69,14 @@ What stands out:
 ## 3. Finding 2: the trap under drop patterns used in practice (P2)
 
 ### 3a. Under the submitted Beta keep: position geometry (P2a)
-Cross-series noise r for m_perp, best layer, against the position-only oracle (≈ 0.76–0.94 across drop rates) ([figs/trap_heatmap.png](eda/figs/trap_heatmap.png)):
+Cross-series noise r for m_perp, best layer, against the position-only oracle (≈ 0.76–0.94 across drop rates) ([figs/trap_heatmap.png](../../experiments/eda/figs/trap_heatmap.png)):
 
 - **All Chronos-T5 sizes, Bolt, Chronos-2:** 0.91–0.98, at or above the oracle (the spline reference is ≈ 0.94; the oracle table is binned). P2a passes: these models exploit the full position geometry.
 - **Time-MoE: 0.11–0.39.** P2a fails for this row (below 50% of the oracle). A causal decoder doesn't linearly expose the Beta warp from noise. A token can't see how many tokens come after it, and the warp depends on the token's rank relative to the whole sequence.
   This is a real architectural difference, not a bug. Time-MoE still counts (0.95), but its count is "how many came before", not "where am I in the window". Worth a sentence in the paper.
 
 ### 3b. Under iid and block drops: interpolation (P2b passes)
-Noise-input r(m_perp), final layer, p = 0.5 ([figs/cv_schemes.png](eda/figs/cv_schemes.png)):
+Noise-input r(m_perp), final layer, p = 0.5 ([figs/cv_schemes.png](../../experiments/eda/figs/cv_schemes.png)):
 
 | Model | iid shuffled (submitted protocol) | iid contiguous | iid cross-series | block shuffled | block contiguous |
 |---|---|---|---|---|---|
@@ -112,12 +113,12 @@ Bolt and Chronos-2 show noise r(m_perp) of 0.07–0.37 under iid. That is consis
 | chronos-2 | 2/12 | 0.098 | −0.001 | −0.027 | [−0.13, 0.21] | **no** |
 | timemoe-50m | 7/12 | 0.398 | 0.001 | 0.375 | [0.32, 0.45] | yes |
 
-**By the pre-registered criterion, 7 of 8 models "keep time".** Say this plainly: it's the opposite of what I expected, and we wrote the criterion down before looking. The next two analyses (not pre-registered, labelled exploratory) show what it consists of.
+**By the pre-registered criterion, 7 of 8 models "keep time".** This was not the expected outcome; the criterion was written down before the run. The next two analyses (not pre-registered, labelled exploratory) show what it consists of.
 
 ### 4b. Exploratory: is it more than reading local change?
 A content-only reader: the same cross-series ridge, but the "hidden state" is just neighbouring values and their differences (bidirectional for the encoder models, past-only for Time-MoE, patch summaries for patch models). On real data it gets r = 0.31–0.37 for gaps (iid, p = 0.5); on noise, ≈ 0.
 
-Paired per-series difference, model minus reader (real input, gap target), with 95% CI ([figs/model_vs_baseline.png](eda/figs/model_vs_baseline.png)):
+Paired per-series difference, model minus reader (real input, gap target), with 95% CI ([figs/model_vs_baseline.png](../../experiments/eda/figs/model_vs_baseline.png)):
 
 | Model | iid p=0.3 | iid p=0.5 | iid p=0.7 | block p=0.5 |
 |---|---|---|---|---|
@@ -133,7 +134,7 @@ Paired per-series difference, model minus reader (real input, gap target), with 
 **Reading:** almost all of the "keeping time" signal is information any trivial reader of the values gets. Chronos-T5 small/base/large add a small, reliable margin (+0.03 to +0.10, likely nonlinear reading of change through the quantized tokens). That margin does not grow with size beyond small/base.
 
 ### 4c. Exploratory: gap visibility is a property of the signal
-Per-series earned time against series smoothness ([figs/content_clock.png](eda/figs/content_clock.png)):
+Per-series earned time against series smoothness ([figs/content_clock.png](../../experiments/eda/figs/content_clock.png)):
 
 | | t5-tiny | t5-mini | t5-small | t5-base | t5-large | timemoe | bolt | chronos-2 |
 |---|---|---|---|---|---|---|---|---|
@@ -145,7 +146,7 @@ Smooth series reveal their gaps (a big jump means a lot of time passed); rough o
 
 ## 5. Finding 4: no accumulation, so no clock (exploratory)
 
-A clock *adds up* ticks. If a model kept time, accumulated time (`m_perp` under iid/block, where position carries no information) should be decodable. It barely is: best-layer real r ≈ 0.10–0.29 for every one-token-per-step model, against ≈ 0.4 for individual gaps ([figs/layers_iid.png](eda/figs/layers_iid.png), middle column).
+A clock *adds up* ticks. If a model kept time, accumulated time (`m_perp` under iid/block, where position carries no information) should be decodable. It barely is: best-layer real r ≈ 0.10–0.29 for every one-token-per-step model, against ≈ 0.4 for individual gaps ([figs/layers_iid.png](../../experiments/eda/figs/layers_iid.png), middle column).
 
 Comparison with a **trivial integrator**: take the content reader's gap estimates and add them up. Model minus integrator, paired per series (real input, m_perp):
 
@@ -179,7 +180,7 @@ This is the sharpest support for the title, and it is new relative to the submit
 | base | 200M | 0.995 | 0.43 | +0.05 | −0.30 |
 | large | 710M | 0.996 | 0.43 | +0.03 | −0.25 |
 
-**Scale buys counting, not timekeeping.** Counting saturates. Gap perception jumps from tiny to mini and is then flat. The margin over a trivial reader peaks at base. Accumulation stays below a running sum at every size. Five points from one family is a trend, not a law; say so.
+**Scale buys counting, not timekeeping.** Counting saturates. Gap perception jumps from tiny to mini and is then flat. The margin over a trivial reader peaks at base. Accumulation stays below a running sum at every size. Five points from one family is a trend, not a law.
 
 Layer note: the best layer for gaps moves deeper with size (tiny 4/4 … large 23/24), while counting peaks mid-to-late stack. The submitted paper's L8 peak for m_perp (beta) persists for t5-base.
 
@@ -207,29 +208,8 @@ Layer note: the best layer for gaps moves deeper with size (tiny 4/4 … large 2
 
 ---
 
-## 9. What this changes for the paper (to discuss before writing)
 
-1. **The claim gets stronger and more precise.** Submitted: "the probe can't tell position from time (one model, one keep)". Now: across 8 models, 3 drop patterns, 4 drop rates and 102 series:
-   - the naive probe is fooled in two different ways (geometry under Beta; interpolation under iid and block);
-   - models count steps almost perfectly;
-   - the time information in their states is what the data's own changes reveal, and it is not accumulated into elapsed time.
-2. **Title fits.** "Counting Steps Is Not Keeping Time" is now directly supported by §2 + §5. Watch one tension: P3 passes. The paper must say models *perceive gaps*, explain that this is the data's change, and avoid "no time information at all".
-3. **Reviewer requests: all addressed.**
-   - iid re-run: §3b.
-   - Keep laws from practice: iid and block.
-   - Trap to avoid: §3, reframed.
-   - More series: 8 → 102. More sparsity levels: 4.
-   - Second model: 3 additional architectures plus the size sweep.
-   - Blocked CV: §3b.
-   - Spline as a reference: oracle and spline both reported.
-4. **Practitioner sentence (reviewer 8Fbz's request for concrete motivation):** "If your pipeline drops missing points and feeds the rest to a TSFM, the model knows which step it's on, sees how much the values jumped, and nothing more. It does not track how much time has passed."
-5. **Candidate figures for 4 pages:**
-   - (1) dense-head/sparse-tail picture plus the CV-scheme bars ([cv_schemes.png](eda/figs/cv_schemes.png));
-   - (2) layer profiles for k / Δt / m_perp, real vs noise, a few models ([layers_iid.png](eda/figs/layers_iid.png));
-   - (3) the counting-vs-keeping plane or the scale table;
-   - (4) model vs trivial reader and integrator.
-
-## 10. Caveats
+## 9. Caveats
 
 - One keep draw per series per condition; variability is across series, not across draws.
 - Linear probes only. A nonlinear probe might find more accumulated time. That would be a stronger claim to make than to refute, and we don't make it.
@@ -239,9 +219,3 @@ Layer note: the best layer for gaps moves deeper with size (tiny 4/4 … large 2
 - UCR first training rows are short, curated signals. Real irregular data (missing not at random, asynchronous) is not tested.
 - §4b, §4c and §5 are exploratory and should be labelled that way in the paper.
 
-## 11. Questions for our discussion
-
-1. Lead with the trap (methodological, the accepted paper's identity) and build to "count, perceive, don't accumulate"? Or lead with the three-part model finding? The camera-ready rules favour the first.
-2. How much of §5 (integrator) goes in the main text vs the appendix, given it's exploratory?
-3. Time-MoE's Beta exception (causal models don't see the warp): main text sentence or appendix?
-4. Do we add the masked-grid (NaN) Chronos-2 run tomorrow morning? It's about 20 GPU-minutes and makes the practical "drop vs NaN" sentence evidence-based. But it's new evidence for a design claim, so it could also wait for the poster.

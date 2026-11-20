@@ -1,6 +1,6 @@
-# Sparse Time Probes
+# Original submission code
 
-Code for **Dual Collinearity in Sparse Time Probes of Chronos** (FMTS @ NeurIPS 2026).
+Code for the submitted version of the paper, titled **Dual Collinearity in Sparse Time Probes of Chronos** at review time. The camera-ready experiments are in [`../experiments`](../experiments); this package is kept because the camera-ready replication check (`experiments/modal_run.py --mode replicate`) reuses its keep sampler and probe.
 
 Under order-preserving sparse sampling, residualized observation time \(m^\perp\) remains a smooth function of token index. Linear probes of this target measure positional feature capacity, not metric-time inference. This repository reproduces the keep geometry, index-only control tasks, and paper figures. The Chronos encoder audit is optional and requires a GPU.
 

@@ -1,0 +1,18 @@
+cff-version: 1.2.0
+message: "If you use this code or results, please cite the paper."
+title: "Position and Elapsed Time in Sparse-Time Probes of Time Series Foundation Models"
+authors:
+  - family-names: Gupta
+    given-names: Akanksha
+    affiliation: 3am Labs
+license: MIT
+repository-code: "https://github.com/AIpsychonaut/neurips-fmts-2026"
+preferred-citation:
+  type: conference-paper
+  title: "Position and Elapsed Time in Sparse-Time Probes of Time Series Foundation Models"
+  authors:
+    - family-names: Gupta
+      given-names: Akanksha
+      affiliation: 3am Labs
+  collection-title: "NeurIPS 2026 Workshop on Foundation Models for Temporal Systems"
+  year: 2026

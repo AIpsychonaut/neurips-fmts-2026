@@ -4,7 +4,7 @@ Rule: every univariate dataset; first TRAIN row; drop NaN padding; truncate to
 first 512 steps; keep if length >= 128 and std > 0; z-score.
 Also writes the 8-series legacy roster (truncated at 400) for the replication check.
 
-python cr/prep_series.py
+python experiments/prep_series.py
 """
 from __future__ import annotations
 

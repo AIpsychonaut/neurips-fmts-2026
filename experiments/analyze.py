@@ -1,6 +1,6 @@
-"""EDA for the camera-ready experiments. Reads cr/results/, writes cr/eda/ (figures, tables, summary.json).
+"""EDA for the camera-ready experiments. Reads experiments/results/, writes experiments/eda/ (figures, tables, summary.json).
 
-python cr/analyze.py
+python experiments/analyze.py
 """
 from __future__ import annotations
 

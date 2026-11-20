@@ -1,11 +1,11 @@
 """Camera-ready experiment runner (Modal).
 
-  modal run cr/modal_run.py --mode smoke        # 6 series, 1 condition, every model
-  modal run cr/modal_run.py --mode replicate    # submitted-paper replication check
-  modal run cr/modal_run.py --mode references   # model-free MC oracle + spline references
-  modal run cr/modal_run.py --mode full         # all models, all conditions
+  modal run experiments/modal_run.py --mode smoke        # 6 series, 1 condition, every model
+  modal run experiments/modal_run.py --mode replicate    # submitted-paper replication check
+  modal run experiments/modal_run.py --mode references   # model-free MC oracle + spline references
+  modal run experiments/modal_run.py --mode full         # all models, all conditions
 
-Results land in cr/results/ as CSV.
+Results land in experiments/results/ as CSV.
 """
 from __future__ import annotations
 
@@ -16,7 +16,7 @@ from pathlib import Path
 import modal
 
 HERE = Path(__file__).resolve().parent
-CODE = HERE.parent / "code" / "sparse_time_probes"
+CODE = HERE.parent / "original_submission" / "sparse_time_probes"
 
 base_pkgs = ["scikit-learn==1.5.2", "pandas==2.2.3", "numpy<2.1"]
 chronos_image = (

@@ -1,5 +1,5 @@
 """Running-sum baseline exactly as integrator_baseline.py (ridge on raw, unscaled dt), for the v2 laws/draws.
-Output: cr/results_v2/integrator_raw_v2.csv
+Output: experiments/results_v2/integrator_raw_v2.csv
 """
 import sys
 from pathlib import Path

@@ -1,6 +1,6 @@
 """Inspect model internals on Modal before writing adapters.
 
-modal run cr/modal_inspect.py
+modal run experiments/modal_inspect.py
 """
 import modal
 

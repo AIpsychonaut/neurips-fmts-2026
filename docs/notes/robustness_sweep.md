@@ -1,12 +1,8 @@
-# Robustness batch (v2): what changed after fixing the limitations
+# Robustness sweep: working notes
 
-**Run:** 6–7 Nov 2026, Modal A10G, all 8 models complete. **Code:**
-- [modal_v2.py](modal_v2.py), the GPU run;
-- [v2core.py](v2core.py), the new drop pattern, patch targets and MLP probe;
-- [v2_refs.py](v2_refs.py) and [v2_integrator_raw.py](v2_integrator_raw.py), the no-model references;
-- [v2_analyze.py](v2_analyze.py), the analysis.
+> Working notes written during the analysis. Where they differ from the paper, the paper is authoritative.
 
-**Numbers:** `results_v2/summary_v2.json`; full printout in `results_v2/analysis_print.txt`. Hidden states for the MLP layers are cached on the Modal volume (`fmts-cr-vol/v2states/`), so further probes are CPU-only.
+**Run:** 6–7 Nov 2026, Modal A10G, all 8 models. **Code:** `experiments/modal_v2.py` (GPU run), `v2core.py` (value-dependent missingness, patch targets, MLP probe), `v2_refs.py` and `v2_integrator_raw.py` (no-model references), `v2_analyze.py` (analysis). **Numbers:** `experiments/results_v2/summary_v2.json` and `analysis_print.txt`.
 
 ## What was run
 
@@ -73,10 +69,3 @@ Model minus running sum, elapsed time at p = 0.7. Ridge / MLP; * means the 95% C
 ### 6. Position (counting): unchanged
 r(k) from noise is 0.94–0.996 for all models under all three patterns, including value-dependent.
 
-## What this changes in the draft
-
-1. **The elapsed-time claim** now rests on block outages and value-dependent drops, where every model falls below the running sum under both linear and nonlinear probes. Under random dropout, report a tie: little elapsed time is available beyond position there.
-2. **Add the value-dependent pattern** to Setup and Table 1. It is the most realistic and the most demanding test, because the values reveal the gaps.
-3. **Add the MLP probe and 3 draws** to Setup. Remove the corresponding limitations; keep "MNAR is one specific mechanism".
-4. **Patch models** move from "inconclusive" to "same pattern", with the first-patch caveat.
-5. **Remove the quantization limitation.**

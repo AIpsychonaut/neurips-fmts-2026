@@ -1,6 +1,6 @@
 """Figure 2 from the three-draw (v2) results. Ridge probes; MLP numbers are in Table 1.
 
-python cr/paper_figs_v2.py   ->  paper_cr/figures/fig2_v2.{pdf,png}
+python experiments/paper_figs_v2.py   ->  paper/figures/fig2_v2.{pdf,png}
 """
 import json
 from pathlib import Path

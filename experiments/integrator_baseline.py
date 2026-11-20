@@ -1,7 +1,7 @@
 """Exploratory: does integrating a content-only gap reader recover accumulated time (m_perp)?
 Cross-series ridge predicts dt from local features (as content_baseline step_bidir/step_causal),
 then predicted gaps are cumulatively summed per series, residualized on k, and correlated with true m_perp.
-python cr/integrator_baseline.py
+python experiments/integrator_baseline.py
 """
 import sys
 from pathlib import Path

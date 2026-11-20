@@ -1,6 +1,6 @@
-"""Camera-ready figures + table numbers. Reads cr/results and cr/eda/summary.json, writes paper_cr/figures/.
+"""Camera-ready figures + table numbers. Reads experiments/results and experiments/eda/summary.json, writes paper/figures/.
 
-python cr/paper_figs.py
+python experiments/paper_figs.py
 """
 from __future__ import annotations
 
@@ -16,7 +16,7 @@ import pandas as pd
 
 HERE = Path(__file__).resolve().parent
 ROOT = HERE.parent
-OUT = ROOT / "paper_cr" / "figures"
+OUT = ROOT / "paper" / "figures"
 OUT.mkdir(parents=True, exist_ok=True)
 S = json.loads((HERE / "eda" / "summary.json").read_text())
 
@@ -181,6 +181,6 @@ def table_numbers(trapvals):
 if __name__ == "__main__":
     d = load()
     tv = fig_trap(d)
-    fig_ladder()
+    # fig_ladder() is the earlier single-draw version of Figure 2; the paper uses paper_figs_v2.py
     nums = table_numbers(tv)
     print(json.dumps(nums, indent=0)[:6000])
