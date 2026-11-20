@@ -1,0 +1,70 @@
+\newpage
+\section*{NeurIPS Paper Checklist}
+
+\begin{enumerate}
+
+\item {\bf Claims}
+    \item[] Answer: \answerYes{}
+    \item[] Justification: The abstract and \S\ref{sec:intro} are supported in \S\ref{sec:trap} and \S\ref{sec:ladder}. Analyses added after the plan are labelled as such.
+
+\item {\bf Limitations}
+    \item[] Answer: \answerYes{}
+    \item[] Justification: \S\ref{sec:limits}.
+
+\item {\bf Theory assumptions and proofs}
+    \item[] Answer: \answerNA{}
+    \item[] Justification: No theorems.
+
+\item {\bf Experimental result reproducibility}
+    \item[] Answer: \answerYes{}
+    \item[] Justification: \S\ref{sec:setup} and App.~\ref{app:protocol} give models, data selection, drop patterns, seeds, probes and references; all weights and data are public.
+
+\item {\bf Open access to data and code}
+    \item[] Answer: \answerYes{}
+    \item[] Justification: Code, the analysis plan and per-series results are in the public repository linked in \S\ref{sec:conc}. UCR~2018~\citep{dau2019ucr} and the model weights are public.
+
+\item {\bf Experimental setting/details}
+    \item[] Answer: \answerYes{}
+    \item[] Justification: App.~\ref{app:protocol}: ridge $\lambda=1$, GroupKFold by series, layer selection on a fixed 30\% of series.
+
+\item {\bf Experiment statistical significance}
+    \item[] Answer: \answerYes{}
+    \item[] Justification: Medians over series with series-bootstrap 95\% CIs (2{,}000 resamples). \S\ref{sec:ladder} averages three keep draws. The intervals are not adjusted for the number of models and conditions (App.~\ref{app:pairs}).
+
+\item {\bf Experiments compute resources}
+    \item[] Answer: \answerYes{}
+    \item[] Justification: App.~\ref{app:protocol}.
+
+\item {\bf Code of ethics}
+    \item[] Answer: \answerYes{}
+    \item[] Justification: Audit of public models on a public archive; no human subjects.
+
+\item {\bf Broader impacts}
+    \item[] Answer: \answerNA{}
+    \item[] Justification: Evaluation methodology for model analysis; no deployment.
+
+\item {\bf Safeguards}
+    \item[] Answer: \answerNA{}
+    \item[] Justification: No high-risk release.
+
+\item {\bf Licenses for existing assets}
+    \item[] Answer: \answerYes{}
+    \item[] Justification: Chronos, Chronos-Bolt and Chronos-2 are Apache-2.0. Time-MoE is Apache-2.0. The UCR archive is cited and used under its terms.
+
+\item {\bf New assets}
+    \item[] Answer: \answerYes{}
+    \item[] Justification: The released code documents the protocol and regenerates every figure and table.
+
+\item {\bf Crowdsourcing and research with human subjects}
+    \item[] Answer: \answerNA{}
+    \item[] Justification: None.
+
+\item {\bf Institutional review board (IRB) approvals}
+    \item[] Answer: \answerNA{}
+    \item[] Justification: None.
+
+\item {\bf Declaration of LLM usage}
+    \item[] Answer: \answerYes{}
+    \item[] Justification: An LLM assistant wrote experiment and analysis code and drafted text under the author's direction; the author verified all claims, numbers and citations.
+
+\end{enumerate}

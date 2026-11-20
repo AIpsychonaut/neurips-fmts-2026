@@ -26,7 +26,7 @@ def cell(m, law, p, key):
 def main():
     rows = ALL[::-1]
     y = np.arange(len(rows))
-    fig, axes = plt.subplots(1, 3, figsize=(5.5, 2.1), sharey=True)
+    fig, axes = plt.subplots(1, 3, figsize=(5.5, 1.75), sharey=True)
     titles = ["(a) Token position", "(b) Gap size", "(c) Elapsed time"]
     for ax, t in zip(axes, titles):
         ax.set_title(t, color=pf.INK)
@@ -62,7 +62,7 @@ def main():
     hs = [axes[0].scatter([], [], s=18, color=pf.BLUE, label="model (best layer)"),
           axes[0].scatter([], [], s=16, facecolor="white", edgecolor=pf.BLUE, lw=1.0, label="model input layer"),
           axes[0].plot([], [], color=pf.REF, lw=2.0, label="no-model reference")[0]]
-    fig.tight_layout(pad=0.3, w_pad=0.6, rect=(0, 0, 1, 0.89))
+    fig.tight_layout(pad=0.3, w_pad=0.6, rect=(0, 0, 1, 0.87))
     fig.legend(handles=hs, loc="upper center", ncol=3, frameon=False, bbox_to_anchor=(0.6, 1.0),
                handletextpad=0.3, columnspacing=1.4)
     for ext in ("pdf", "png"):

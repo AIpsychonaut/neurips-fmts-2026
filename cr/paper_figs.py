@@ -56,7 +56,7 @@ def fig_trap(d):
     laws = [("beta", "Beta keep"), ("iid", "Random dropout"), ("block", "Block outages")]
     schemes = [("within_shuffled", "Shuffled\nfolds"), ("within_blocked", "Contiguous\nfolds"), ("cross", "Held-out\nseries")]
     p = 0.5
-    fig, axes = plt.subplots(1, 3, figsize=(5.5, 1.85), sharey=True)
+    fig, axes = plt.subplots(1, 3, figsize=(5.5, 1.5), sharey=True)
     rng = np.random.default_rng(0)
     vals = {}
     for ax, (law, title) in zip(axes, laws):
@@ -87,7 +87,7 @@ def fig_trap(d):
     h1 = axes[0].scatter([], [], s=16, color=BLUE, label="Chronos-T5 (5 sizes)")
     h2 = axes[0].scatter([], [], s=16, facecolor="white", edgecolor=ORANGE, linewidth=1.0, label="Time-MoE")
     h3 = axes[0].plot([], [], color=INK, lw=1.2, label="median")[0]
-    fig.tight_layout(pad=0.3, w_pad=0.8, rect=(0, 0, 1, 0.88))
+    fig.tight_layout(pad=0.3, w_pad=0.8, rect=(0, 0, 1, 0.86))
     fig.legend(handles=[h1, h2, h3], loc="upper center", ncol=3, frameon=False, bbox_to_anchor=(0.55, 1.0))
     for ext in ("pdf", "png"):
         fig.savefig(OUT / f"fig1_trap.{ext}", bbox_inches="tight")
